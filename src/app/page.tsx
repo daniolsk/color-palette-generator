@@ -88,7 +88,7 @@ const ColorFormatDisplay = ({color, colorInFormat, label}: {
 
     return (
         <div>
-            <div className="text-sm text-gray-500 mb-0.5">
+            <div className="text-sm text-gray-600 mb-0.5">
                 {label}
             </div>
             <input
