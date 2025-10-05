@@ -1,18 +1,9 @@
 import {
-    hsvaToHex,
-    HsvaColor,
-    hsvaToRgba,
-    rgbaToHexa,
-    hslaToHsva,
-    HslaColor,
-    CmykColor,
-    RgbaColor
+    hsvaToHex, HsvaColor, hsvaToRgba, rgbaToHexa, HslaColor, CmykColor, RgbaColor
 } from "@/lib/colors";
 
-export const ColorFormatDisplay = ({color, colorInFormat, label}: {
-    color: HsvaColor,
-    colorInFormat: RgbaColor | HslaColor | HsvaColor | CmykColor,
-    label: string
+export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
+    color: HsvaColor, colorInFormat: RgbaColor | HslaColor | HsvaColor | CmykColor, label: string
 }) => {
     const getColorText = () => {
         switch (label) {
@@ -30,7 +21,7 @@ export const ColorFormatDisplay = ({color, colorInFormat, label}: {
                 return `${Math.round(colorInFormat.c)}, ${Math.round(colorInFormat.m)}, ${Math.round(colorInFormat.y)}, ${Math.round(colorInFormat.k)}`;
 
         }
-    }
+    };
 
     return (
         <div>
@@ -48,5 +39,5 @@ export const ColorFormatDisplay = ({color, colorInFormat, label}: {
                 }}
             />
         </div>
-    )
-}
+    );
+};

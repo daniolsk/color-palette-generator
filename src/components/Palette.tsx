@@ -3,5 +3,5 @@ export const Palette = () => {
         <div>
             Color Palette
         </div>
-    )
-}
+    );
+};

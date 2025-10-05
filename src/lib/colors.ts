@@ -75,11 +75,11 @@ export const rgbaToHsva = ({r, g, b, a}: RgbaColor): HsvaColor => {
 };
 
 export const rgbToCmyk = (rgb: RgbColor) => {
-    let result: CmykColor = {c: 0, m: 0, y: 0, k: 0};
+    const result: CmykColor = { c: 0, m: 0, y: 0, k: 0 };
 
-    let r = rgb.r / 255;
-    let g = rgb.g / 255;
-    let b = rgb.b / 255;
+    const r = rgb.r / 255;
+    const g = rgb.g / 255;
+    const b = rgb.b / 255;
 
     result.k = Math.min(1 - r, 1 - g, 1 - b);
     result.c = (1 - r - result.k) / (1 - result.k);

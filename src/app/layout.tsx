@@ -1,26 +1,25 @@
 import type { Metadata } from "next";
-import {Montserrat} from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({
-    subsets: ['latin']
+    subsets: ["latin"]
 });
 
 export const metadata: Metadata = {
-    title: "Color Palette Generator",
-    description: "Color Palette Generator - made by Daniel Skowron",
+    title: "Color Palette Generator", description: "Color Palette Generator - made by Daniel Skowron"
 };
 
 export default function RootLayout({
-  children,
+    children
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-      <html lang="pl" className={montserrat.className}>
-      <body>
+    return (
+        <html lang="pl" className={montserrat.className}>
+        <body>
         {children}
-      </body>
-    </html>
-  );
+        </body>
+        </html>
+    );
 }
