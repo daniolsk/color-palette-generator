@@ -4,13 +4,14 @@ import {hslaToHsva, HslaColor, HsvaColor, hsvaToHex} from "@/lib/colors";
 import ShadeSlider from "@uiw/react-color-shade-slider";
 
 function ColorWheel({color, changeColor}: {
-    color: HslaColor,
-    changeColor: (color: HslaColor) => void
+    color: HsvaColor, changeColor: (color: HsvaColor) => void
 }) {
     return (
         <Fragment>
-            <Wheel width={384} height={384} color={{...hslaToHsva(color), v: 100}}
-                   onChange={(color) => changeColor(color.hsla)}
+            <Wheel width={384} height={384} color={{ ...color, v: 100 }}
+                   onChange={(colorResult) => {
+                       changeColor({ ...colorResult.hsva, v: color.v });
+                   }}
                    pointer={({color, style}) => {
                        return (
                            <div style={style}>

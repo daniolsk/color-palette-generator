@@ -10,7 +10,7 @@ import {
 } from "@/lib/colors";
 
 export const ColorFormatDisplay = ({color, colorInFormat, label}: {
-    color: HslaColor,
+    color: HsvaColor,
     colorInFormat: RgbaColor | HslaColor | HsvaColor | CmykColor,
     label: string
 }) => {
@@ -43,8 +43,8 @@ export const ColorFormatDisplay = ({color, colorInFormat, label}: {
                 disabled={true}
                 value={getColorText()}
                 style={{
-                    borderColor: hsvaToHex(hslaToHsva({...color, l: 30})),
-                    backgroundColor: rgbaToHexa(hsvaToRgba(hslaToHsva({...color, a: 0.2}))),
+                    borderColor: hsvaToHex({ ...color, v: 30 }),
+                    backgroundColor: rgbaToHexa(hsvaToRgba({ ...color, a: 0.2 }))
                 }}
             />
         </div>
