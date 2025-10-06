@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { Palette } from "@/components/Palette";
 import { ColorPicker } from "@/components/ColorPicker";
-import { HsvaColor, hsvaToHex, hsvaToRgba, rgbaToHexa } from "@/lib/colors";
+import { Toaster } from 'react-hot-toast';
+import { HsvaColor, hsvaToRgba, rgbaToHexa } from "@/lib/colors";
 
 const Home = () => {
     const [color, setColor] = useState<HsvaColor>({ h: 143, s: 100, v: 100, a: 1 });
@@ -24,6 +25,7 @@ const Home = () => {
                 <Palette color={color} />
             </div>
             <div className="p-4 text-center">Made with ❤️ by Daniel Skowron</div>
+            <Toaster />
         </div>
     );
 };

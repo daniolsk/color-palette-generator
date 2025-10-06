@@ -2,6 +2,7 @@ import {
     hsvaToHex, HsvaColor, hsvaToRgba, rgbaToHexa, HslaColor, CmykColor, RgbaColor
 } from "@/lib/colors";
 import { Copy } from "lucide-react";
+import toast from "react-hot-toast";
 
 export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
     color: HsvaColor, colorInFormat: RgbaColor | HslaColor | HsvaColor | CmykColor, label: string
@@ -28,6 +29,7 @@ export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
         const text = getColorText();
         if (text) {
             await navigator.clipboard.writeText(text);
+            toast.success('Skopiowano do schowka!')
         }
     };
 

@@ -22,6 +22,7 @@ import {
     getTetradic
 } from "@/lib/colorSchemes";
 import Color from "color";
+import toast from "react-hot-toast";
 
 export const Palette = ({ color }: { color: HsvaColor }) => {
     const [harmony, setHarmony] = useState<string>("analogous");
@@ -68,6 +69,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
 
     const copyPalette = async () => {
         await navigator.clipboard.writeText(palette.join(", "));
+        toast.success('Skopiowano do schowka!')
     };
 
     return (
@@ -138,7 +140,10 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                     >
                                         <div
                                             className="mb-2 text-center cursor-pointer font-medium px-2 py-1 rounded-2xl flex gap-2 items-center transition-all"
-                                            onClick={async () => await navigator.clipboard.writeText(col)}
+                                            onClick={async () => {
+                                                await navigator.clipboard.writeText(col);
+                                                toast.success('Skopiowano do schowka!')
+                                            }}
                                             style={{
                                                 backgroundColor: col
                                             }}
@@ -155,7 +160,10 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                         <div className="flex flex-col gap-1 text-xs">
                                             <div
                                                 className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
-                                                onClick={async () => await navigator.clipboard.writeText(getColorText(hsvaToRgba(hexToHsva(col)), "RGB"))}
+                                                onClick={async () => {
+                                                    await navigator.clipboard.writeText(getColorText(hsvaToRgba(hexToHsva(col)), "RGB"));
+                                                    toast.success('Skopiowano do schowka!');
+                                                }}
                                                 style={{ backgroundColor: col }}
                                                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
                                                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = col}
@@ -165,7 +173,10 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
 
                                             <div
                                                 className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
-                                                onClick={async () => await navigator.clipboard.writeText(getColorText(hsvaToHsla(hexToHsva(col)), "HSL"))}
+                                                onClick={async () => {
+                                                    await navigator.clipboard.writeText(getColorText(hsvaToHsla(hexToHsva(col)), "HSL"));
+                                                    toast.success('Skopiowano do schowka!')
+                                                }}
                                                 style={{ backgroundColor: col }}
                                                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
                                                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = col}
@@ -175,7 +186,10 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
 
                                             <div
                                                 className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
-                                                onClick={async () => await navigator.clipboard.writeText(getColorText(hexToHsva(col), "HSV"))}
+                                                onClick={async () => {
+                                                    await navigator.clipboard.writeText(getColorText(hexToHsva(col), "HSV"));
+                                                    toast.success('Skopiowano do schowka!')
+                                                }}
                                                 style={{ backgroundColor: col }}
                                                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
                                                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = col}
@@ -185,7 +199,10 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
 
                                             <div
                                                 className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
-                                                onClick={async () => await navigator.clipboard.writeText(getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK"))}
+                                                onClick={async () => {
+                                                    await navigator.clipboard.writeText(getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK"));
+                                                    toast.success('Skopiowano do schowka!')
+                                                }}
                                                 style={{ backgroundColor: col }}
                                                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
                                                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = col}
