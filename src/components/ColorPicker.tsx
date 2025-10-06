@@ -9,7 +9,7 @@ export const ColorPicker = ({ color, changeColor }: {
     color: HsvaColor, changeColor: (color: HsvaColor) => void
 }) => {
     return (
-        <div className="min-h-screen gap-12 flex flex-col items-center justify-center">
+        <div className="gap-8 flex flex-col items-center justify-center">
             <div className="flex justify-center items-center gap-4">
                 <span className="font-medium text-2xl">#</span>
                 <input

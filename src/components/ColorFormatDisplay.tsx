@@ -24,6 +24,13 @@ export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
         }
     };
 
+    const copyColor = async () => {
+        const text = getColorText();
+        if (text) {
+            await navigator.clipboard.writeText(text);
+        }
+    };
+
     return (
         <div className="relative">
             <div className="text-sm text-gray-600 mb-0.5">
@@ -45,6 +52,7 @@ export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
                         hsvaToRgba({ ...color, a: 0.2 })
                     )
                 }}
+                onClick={copyColor}
             >
                 <div className="flex-1">{getColorText()}</div>
                 <Copy />
