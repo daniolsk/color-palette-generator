@@ -24,7 +24,7 @@ import {
 import Color from "color";
 
 export const Palette = ({ color }: { color: HsvaColor }) => {
-    const [harmony, setHarmony] = useState<string>("monochromatic");
+    const [harmony, setHarmony] = useState<string>("analogous");
     const [hoveredIndex, setHoveredIndex] = useState<number|null>(null);
 
     const palette = useMemo(() => {
@@ -75,6 +75,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
             <div className="flex gap-2 lg:gap-4 text-lg items-center flex-col lg:flex-row">
                 <h2 className="text-lg">Harmonia kolorów:</h2>
                 <select
+                    defaultValue="analogous"
                     onChange={(e) => setHarmony(e.target.value)}
                     name="colorHarmony"
                     id="colorHarmony"
