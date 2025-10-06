@@ -59,6 +59,8 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
             case "CMYK":
                 color = color as CmykColor;
                 return `${Math.round(color.c)}, ${Math.round(color.m)}, ${Math.round(color.y)}, ${Math.round(color.k)}`;
+            default:
+                return "";
 
         }
     };
@@ -119,8 +121,10 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                     {hoveredIndex === i && (
                                         <div className="h-full w-full flex flex-col justify-center items-center">
                                             <div
-                                                className="mb-2 text-center cursor-pointer font-medium px-2 py-1 rounded-2xl"
-                                                onClick={() => {}}
+                                                className="mb-2 text-center cursor-pointer font-medium px-2 py-1 rounded-2xl flex gap-2 items-center"
+                                                onClick={async () => {
+                                                    await navigator.clipboard.writeText(col);
+                                                }}
                                                 style={{
                                                     backgroundColor: col
                                                 }}
@@ -134,12 +138,14 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                     e.currentTarget.style.backgroundColor = col
                                                 }}
                                             >
-                                                {col}
+                                                {col} <Copy size={16} />
                                             </div>
                                             <div className="flex flex-col gap-1 text-xs">
                                                 <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl"
-                                                    onClick={() => {}}
+                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2"
+                                                    onClick={async () => {
+                                                        await navigator.clipboard.writeText(getColorText(hsvaToRgba(hexToHsva(col)), "RGB"));
+                                                    }}
                                                     style={{
                                                         backgroundColor: col
                                                     }}
@@ -153,11 +159,13 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                         e.currentTarget.style.backgroundColor = col
                                                     }}
                                                 >
-                                                    RGB: {getColorText(hsvaToRgba(hexToHsva(col)), "RGB")}
+                                                    RGB: {getColorText(hsvaToRgba(hexToHsva(col)), "RGB")} <Copy size={12} />
                                                 </div>
                                                 <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl"
-                                                    onClick={() => {}}
+                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2"
+                                                    onClick={async () => {
+                                                        await navigator.clipboard.writeText(getColorText(hsvaToHsla(hexToHsva(col)), "HSL"));
+                                                    }}
                                                     style={{
                                                         backgroundColor: col
                                                     }}
@@ -171,11 +179,13 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                         e.currentTarget.style.backgroundColor = col
                                                     }}
                                                 >
-                                                    HSL: {getColorText(hsvaToHsla(hexToHsva(col)), "HSL")}
+                                                    HSL: {getColorText(hsvaToHsla(hexToHsva(col)), "HSL")} <Copy size={12} />
                                                 </div>
                                                 <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl"
-                                                    onClick={() => {}}
+                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2"
+                                                    onClick={async () => {
+                                                        await navigator.clipboard.writeText(getColorText(hexToHsva(col), "HSV")); <Copy size={12} />
+                                                    }}
                                                     style={{
                                                         backgroundColor: col
                                                     }}
@@ -189,11 +199,13 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                         e.currentTarget.style.backgroundColor = col
                                                     }}
                                                 >
-                                                    HSV: {getColorText(hexToHsva(col), "HSV")}
+                                                    HSV: {getColorText(hexToHsva(col), "HSV")} <Copy size={12} />
                                                 </div>
                                                 <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl"
-                                                    onClick={() => {}}
+                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2"
+                                                    onClick={async () => {
+                                                        await navigator.clipboard.writeText(getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK"));
+                                                    }}
                                                     style={{
                                                         backgroundColor: col
                                                     }}
@@ -207,7 +219,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                         e.currentTarget.style.backgroundColor = col
                                                     }}
                                                 >
-                                                    CMYK: {getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK")}
+                                                    CMYK: {getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK")} <Copy size={12} />
                                                 </div>
                                             </div>
                                         </div>
