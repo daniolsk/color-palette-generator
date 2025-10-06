@@ -9,10 +9,20 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                 <select
                     name="colorHarmony"
                     id="colorHarmony"
-                    className="py-1 px-2 text-lg border-2 rounded-2xl focus:outline-none cursor-pointer"
+                    className="py-1 px-2 text-lg border-2 rounded-2xl focus:outline-none cursor-pointer transition"
                     style={{
                         borderColor: hsvaToHex({ ...color, v: 30 }),
                         backgroundColor: rgbaToHexa(hsvaToRgba({ ...color, a: 0.2 }))
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = rgbaToHexa(
+                            hsvaToRgba({ ...color, v: Math.min(color.v + 10, 100), a: 0.3 })
+                        )
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = rgbaToHexa(
+                            hsvaToRgba({ ...color, a: 0.2 })
+                        )
                     }}
                 >
                     <option value="monochromatic">Monochromatyczna</option>

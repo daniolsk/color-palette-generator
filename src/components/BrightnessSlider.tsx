@@ -19,7 +19,7 @@ export const BrightnessSlider = ({ color, changeColor }: {
                 value={color.v}
                 onChange={(e) => changeColor({ ...color, v: parseFloat(e.target.value) })}
                 className="
-                    appearance-none w-full h-8 bg-transparent cursor-pointer
+                    appearance-none w-full h-8 bg-transparent cursor-pointer transition
                     [&::-webkit-slider-thumb]:appearance-none
                     [&::-webkit-slider-thumb]:h-6
                     [&::-webkit-slider-thumb]:w-6
