@@ -81,10 +81,18 @@ export const rgbToCmyk = (rgb: RgbColor) => {
     const g = rgb.g / 255;
     const b = rgb.b / 255;
 
-    result.k = Math.min(1 - r, 1 - g, 1 - b);
-    result.c = (1 - r - result.k) / (1 - result.k);
-    result.m = (1 - g - result.k) / (1 - result.k);
-    result.y = (1 - b - result.k) / (1 - result.k);
+    const k = Math.min(1 - r, 1 - g, 1 - b);
+    result.k = k;
+
+    if (k === 1) {
+        result.c = 0;
+        result.m = 0;
+        result.y = 0;
+    } else {
+        result.c = (1 - r - k) / (1 - k);
+        result.m = (1 - g - k) / (1 - k);
+        result.y = (1 - b - k) / (1 - k);
+    }
 
     result.c = Math.round(result.c * 100);
     result.m = Math.round(result.m * 100);
@@ -92,7 +100,7 @@ export const rgbToCmyk = (rgb: RgbColor) => {
     result.k = Math.round(result.k * 100);
 
     return result;
-}
+};
 
 export const hsvaToHslString = (hsva: HsvaColor): string => {
     const {h, s, l} = hsvaToHsla(hsva);
