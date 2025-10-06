@@ -7,10 +7,12 @@ import {
     hsvaToHsla,
     hsvaToRgba,
     RgbaColor,
-    rgbaToHexa, rgbaToRgb, rgbToCmyk
+    rgbaToHexa,
+    rgbaToRgb,
+    rgbToCmyk
 } from "@/lib/colors";
 import { Copy } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
     getMonochromatic,
     getAnalogous,
@@ -61,7 +63,6 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                 return `${Math.round(color.c)}, ${Math.round(color.m)}, ${Math.round(color.y)}, ${Math.round(color.k)}`;
             default:
                 return "";
-
         }
     };
 
@@ -103,118 +104,106 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
             <div className="px-8 w-full flex-1">
                 <div className="flex h-full flex-col bg-white rounded-2xl w-full items-center">
                     <h2 className="mt-8 text-xl font-medium">Twoja paleta barw:</h2>
-                    <div className={`grid ${palette.length <= 3 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-fr gap-4 p-6 w-full h-full`}>
+                    <div className={`grid ${palette.length <= 3 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-fr gap-4 p-6 w-full h-full transition-all`}>
                         {palette.map((col, i) => {
                             const textColor = hoveredIndex === i
                                 ? (Color(col).isLight() ? "rgba(0,0,0,1)" : "rgba(255,255,255,1)")
-                                : (Color(col).isLight() ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.5)");
+                                : (Color(col).isLight() ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.7)");
+
                             return (
                                 <div
                                     key={i}
-                                    className="w-full font-medium text-xl rounded-2xl flex items-center justify-center transition-all"
+                                    className="relative w-full min-h-48 font-medium text-xl rounded-2xl flex items-center justify-center p-2 overflow-hidden transition-all"
                                     style={{ backgroundColor: col, color: textColor }}
                                     onMouseEnter={() => setHoveredIndex(i)}
                                     onMouseLeave={() => setHoveredIndex(null)}
                                 >
-                                    {hoveredIndex !== i ? col : null}
-                                    {hoveredIndex === i && (
-                                        <div className="h-full w-full flex flex-col justify-center items-center">
+                                    <span
+                                        className="transition-all duration-300"
+                                        style={{
+                                            opacity: hoveredIndex === i ? 0 : 1,
+                                            transform: hoveredIndex === i ? "scale(0.95)" : "scale(1)",
+                                        }}
+                                    >
+                                        {col}
+                                    </span>
+
+                                    <div
+                                        className="absolute inset-0 flex flex-col justify-center items-center opacity-0 scale-95 transition-all duration-300"
+                                        style={{
+                                            opacity: hoveredIndex === i ? 1 : 0,
+                                            transform: hoveredIndex === i ? "scale(1)" : "scale(0.95)",
+                                        }}
+                                    >
+                                        <div
+                                            className="mb-2 text-center cursor-pointer font-medium px-2 py-1 rounded-2xl flex gap-2 items-center transition-all"
+                                            onClick={async () => await navigator.clipboard.writeText(col)}
+                                            style={{
+                                                backgroundColor: col
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)";
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.backgroundColor = col;
+                                            }}
+                                        >
+                                            {col} <Copy size={16} />
+                                        </div>
+
+                                        <div className="flex flex-col gap-1 text-xs">
                                             <div
-                                                className="mb-2 text-center cursor-pointer font-medium px-2 py-1 rounded-2xl flex gap-2 items-center transition-all"
-                                                onClick={async () => {
-                                                    await navigator.clipboard.writeText(col);
-                                                }}
-                                                style={{
-                                                    backgroundColor: col
-                                                }}
-                                                onMouseEnter={(e) => {
-                                                    e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
-                                                }}
-                                                onMouseLeave={(e) => {
-                                                    e.currentTarget.style.backgroundColor = col
-                                                }}
+                                                className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
+                                                onClick={async () => await navigator.clipboard.writeText(getColorText(hsvaToRgba(hexToHsva(col)), "RGB"))}
+                                                style={{ backgroundColor: col }}
+                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
+                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = col}
                                             >
-                                                {col} <Copy size={16} />
+                                                RGB: {getColorText(hsvaToRgba(hexToHsva(col)), "RGB")} <Copy size={12} />
                                             </div>
-                                            <div className="flex flex-col gap-1 text-xs">
-                                                <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
-                                                    onClick={async () => {
-                                                        await navigator.clipboard.writeText(getColorText(hsvaToRgba(hexToHsva(col)), "RGB"));
-                                                    }}
-                                                    style={{
-                                                        backgroundColor: col
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.currentTarget.style.backgroundColor = col
-                                                    }}
-                                                >
-                                                    RGB: {getColorText(hsvaToRgba(hexToHsva(col)), "RGB")} <Copy size={12} />
-                                                </div>
-                                                <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
-                                                    onClick={async () => {
-                                                        await navigator.clipboard.writeText(getColorText(hsvaToHsla(hexToHsva(col)), "HSL"));
-                                                    }}
-                                                    style={{
-                                                        backgroundColor: col
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.currentTarget.style.backgroundColor = col
-                                                    }}
-                                                >
-                                                    HSL: {getColorText(hsvaToHsla(hexToHsva(col)), "HSL")} <Copy size={12} />
-                                                </div>
-                                                <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
-                                                    onClick={async () => {
-                                                        await navigator.clipboard.writeText(getColorText(hexToHsva(col), "HSV")); <Copy size={12} />
-                                                    }}
-                                                    style={{
-                                                        backgroundColor: col
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.currentTarget.style.backgroundColor = col
-                                                    }}
-                                                >
-                                                    HSV: {getColorText(hexToHsva(col), "HSV")} <Copy size={12} />
-                                                </div>
-                                                <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
-                                                    onClick={async () => {
-                                                        await navigator.clipboard.writeText(getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK"));
-                                                    }}
-                                                    style={{
-                                                        backgroundColor: col
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.currentTarget.style.backgroundColor = col
-                                                    }}
-                                                >
-                                                    CMYK: {getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK")} <Copy size={12} />
-                                                </div>
+
+                                            <div
+                                                className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
+                                                onClick={async () => await navigator.clipboard.writeText(getColorText(hsvaToHsla(hexToHsva(col)), "HSL"))}
+                                                style={{ backgroundColor: col }}
+                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
+                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = col}
+                                            >
+                                                HSL: {getColorText(hsvaToHsla(hexToHsva(col)), "HSL")} <Copy size={12} />
+                                            </div>
+
+                                            <div
+                                                className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
+                                                onClick={async () => await navigator.clipboard.writeText(getColorText(hexToHsva(col), "HSV"))}
+                                                style={{ backgroundColor: col }}
+                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
+                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = col}
+                                            >
+                                                HSV: {getColorText(hexToHsva(col), "HSV")} <Copy size={12} />
+                                            </div>
+
+                                            <div
+                                                className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
+                                                onClick={async () => await navigator.clipboard.writeText(getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK"))}
+                                                style={{ backgroundColor: col }}
+                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"}
+                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = col}
+                                            >
+                                                CMYK: {getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK")} <Copy size={12} />
                                             </div>
                                         </div>
-                                    )}
+                                    </div>
                                 </div>
                             );
                         })}
                     </div>
                 </div>
             </div>
-            <div onClick={copyPalette} className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-2xl hover:bg-gray-300 transition">
+
+            <div
+                onClick={copyPalette}
+                className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-2xl hover:bg-gray-300 transition"
+            >
                 Kopiuj całą paletę <Copy />
             </div>
         </div>
