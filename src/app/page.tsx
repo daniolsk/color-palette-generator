@@ -19,7 +19,7 @@ const Home = () => {
                     })
                 )
             }}>Generator palet kolorów</div>
-            <div className="grid grid-cols-2 items-start flex-1 p-4 xl:mx-auto xl:w-[1280px]">
+            <div className="grid grid-cols-1 desktop:grid-cols-2 items-start flex-1 p-4 xl:mx-auto xl:w-[1280px]">
                 <ColorPicker color={color} changeColor={(color) => setColor(color)} />
                 <Palette color={color} />
             </div>

@@ -33,7 +33,7 @@ export const ColorPicker = ({ color, changeColor }: {
     }, [color]);
 
     return (
-        <div className="gap-8 py-8 flex flex-col items-center justify-center sticky top-0">
+        <div className="gap-8 py-8 flex flex-col items-center justify-center desktop:sticky desktop:top-0">
             <div className="flex justify-center items-center gap-4">
                 <span className="font-medium text-2xl">#</span>
                 <input
@@ -70,10 +70,10 @@ export const ColorPicker = ({ color, changeColor }: {
             <div>
                 <ColorWheel color={color} changeColor={(color: HsvaColor) => changeColor(color)} />
             </div>
-            <div className="w-96 flex flex-col items-center gap-2">
+            <div className="w-80 desktop:w-64 lg:w-96 flex flex-col items-center gap-2">
                 <BrightnessSlider color={color} changeColor={(color: HsvaColor) => changeColor(color)} />
             </div>
-            <div className="w-full grid grid-cols-2 gap-4 px-4">
+            <div className="w-full grid gap-2 grid-cols-1 desktop:grid-cols-2 lg:gap-4 px-4">
                 <ColorFormatDisplay color={color} colorInFormat={hsvaToRgba(color)} label="RGB" />
                 <ColorFormatDisplay color={color} colorInFormat={color} label="HSV" />
                 <ColorFormatDisplay color={color} colorInFormat={hsvaToHsla(color)} label="HSL" />

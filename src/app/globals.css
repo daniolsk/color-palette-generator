@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+    --breakpoint-desktop: 960px;
+}
+
 body {
     background-color: #E8E8E8;
     min-height: 100vh;

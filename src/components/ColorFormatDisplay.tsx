@@ -37,7 +37,7 @@ export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
                 {label}
             </div>
             <div
-                className="w-full shadow-lg items-center gap-8 flex px-4 py-2 text-lg rounded-2xl font-medium focus:outline-none cursor-pointer transition"
+                className="w-full shadow-lg items-center gap-2 lg:gap-8 flex px-4 py-2 lg:text-lg rounded-2xl font-medium focus:outline-none cursor-pointer transition"
                 style={{
                     backgroundColor: rgbaToHexa(hsvaToRgba({ ...color, a: 0.2 }))
                 }}
@@ -54,7 +54,7 @@ export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
                 onClick={copyColor}
             >
                 <div className="flex-1">{getColorText()}</div>
-                <Copy />
+                <Copy className="size-3 lg:size-4" />
             </div>
         </div>
     );

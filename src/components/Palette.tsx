@@ -72,7 +72,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
 
     return (
         <div className="gap-8 py-8 flex flex-col items-center justify-center">
-            <div className="flex gap-4 text-lg items-center">
+            <div className="flex gap-2 lg:gap-4 text-lg items-center flex-col lg:flex-row">
                 <h2 className="text-lg">Harmonia kolorów:</h2>
                 <select
                     onChange={(e) => setHarmony(e.target.value)}
@@ -101,10 +101,10 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                     <option value="tetradic">Tetradyczna (kwadratowa)</option>
                 </select>
             </div>
-            <div className="px-8 w-full flex-1">
+            <div className="desktop:px-8 w-full flex-1">
                 <div className="flex h-full flex-col bg-white rounded-2xl w-full items-center">
                     <h2 className="mt-8 text-xl font-medium">Twoja paleta barw:</h2>
-                    <div className={`grid ${palette.length <= 3 ? 'grid-cols-1' : 'grid-cols-2'} auto-rows-fr gap-4 p-6 w-full h-full transition-all`}>
+                    <div className={`grid grid-cols-1 ${palette.length <= 3 ? 'desktop:grid-cols-1' : 'desktop:grid-cols-2'} auto-rows-fr gap-4 p-6 w-full h-full transition-all`}>
                         {palette.map((col, i) => {
                             const textColor = hoveredIndex === i
                                 ? (Color(col).isLight() ? "rgba(0,0,0,1)" : "rgba(255,255,255,1)")
@@ -204,7 +204,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                 onClick={copyPalette}
                 className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-2xl hover:bg-gray-300 transition"
             >
-                Kopiuj całą paletę <Copy />
+                Kopiuj całą paletę <Copy size={16} />
             </div>
         </div>
     );
