@@ -5,10 +5,9 @@ export const BrightnessSlider = ({ color, changeColor }: {
 }) => {
     return (
         <div
-            className="relative w-full h-8 overflow-hidden flex items-center border-2 rounded-2xl"
+            className="relative w-full shadow-lg h-8 overflow-hidden flex items-center rounded-2xl"
             style={{
                 background: `linear-gradient(to right, black, ${hsvaToRgbaString({ ...color, v: 100 })})`,
-                borderColor: hsvaToHex({ ...color, v: 30 })
             }}
         >
             <input

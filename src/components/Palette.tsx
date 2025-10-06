@@ -77,9 +77,8 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                     onChange={(e) => setHarmony(e.target.value)}
                     name="colorHarmony"
                     id="colorHarmony"
-                    className="py-1 px-2 text-lg border-2 rounded-2xl focus:outline-none cursor-pointer transition"
+                    className="py-2 px-3 text-lg shadow-lg rounded-2xl focus:outline-none cursor-pointer transition"
                     style={{
-                        borderColor: hsvaToHex({ ...color, v: 30 }),
                         backgroundColor: rgbaToHexa(hsvaToRgba({ ...color, a: 0.2 }))
                     }}
                     onMouseEnter={(e) => {
@@ -121,7 +120,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                     {hoveredIndex === i && (
                                         <div className="h-full w-full flex flex-col justify-center items-center">
                                             <div
-                                                className="mb-2 text-center cursor-pointer font-medium px-2 py-1 rounded-2xl flex gap-2 items-center"
+                                                className="mb-2 text-center cursor-pointer font-medium px-2 py-1 rounded-2xl flex gap-2 items-center transition-all"
                                                 onClick={async () => {
                                                     await navigator.clipboard.writeText(col);
                                                 }}
@@ -129,10 +128,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                     backgroundColor: col
                                                 }}
                                                 onMouseEnter={(e) => {
-                                                    e.currentTarget.style.backgroundColor = rgbaToHexa(
-                                                        hsvaToRgba({ ...hexToHsva(col), v: Math.min(hexToHsva(col).v + 10, 100), a: 0.3 })
-
-                                                    )
+                                                    e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
                                                 }}
                                                 onMouseLeave={(e) => {
                                                     e.currentTarget.style.backgroundColor = col
@@ -142,7 +138,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                             </div>
                                             <div className="flex flex-col gap-1 text-xs">
                                                 <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2"
+                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
                                                     onClick={async () => {
                                                         await navigator.clipboard.writeText(getColorText(hsvaToRgba(hexToHsva(col)), "RGB"));
                                                     }}
@@ -150,10 +146,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                         backgroundColor: col
                                                     }}
                                                     onMouseEnter={(e) => {
-                                                        e.currentTarget.style.backgroundColor = rgbaToHexa(
-                                                            hsvaToRgba({ ...hexToHsva(col), v: Math.min(hexToHsva(col).v + 10, 100), a: 0.3 })
-
-                                                        )
+                                                        e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
                                                     }}
                                                     onMouseLeave={(e) => {
                                                         e.currentTarget.style.backgroundColor = col
@@ -162,7 +155,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                     RGB: {getColorText(hsvaToRgba(hexToHsva(col)), "RGB")} <Copy size={12} />
                                                 </div>
                                                 <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2"
+                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
                                                     onClick={async () => {
                                                         await navigator.clipboard.writeText(getColorText(hsvaToHsla(hexToHsva(col)), "HSL"));
                                                     }}
@@ -170,10 +163,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                         backgroundColor: col
                                                     }}
                                                     onMouseEnter={(e) => {
-                                                        e.currentTarget.style.backgroundColor = rgbaToHexa(
-                                                            hsvaToRgba({ ...hexToHsva(col), v: Math.min(hexToHsva(col).v + 10, 100), a: 0.3 })
-
-                                                        )
+                                                        e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
                                                     }}
                                                     onMouseLeave={(e) => {
                                                         e.currentTarget.style.backgroundColor = col
@@ -182,7 +172,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                     HSL: {getColorText(hsvaToHsla(hexToHsva(col)), "HSL")} <Copy size={12} />
                                                 </div>
                                                 <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2"
+                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
                                                     onClick={async () => {
                                                         await navigator.clipboard.writeText(getColorText(hexToHsva(col), "HSV")); <Copy size={12} />
                                                     }}
@@ -190,10 +180,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                         backgroundColor: col
                                                     }}
                                                     onMouseEnter={(e) => {
-                                                        e.currentTarget.style.backgroundColor = rgbaToHexa(
-                                                            hsvaToRgba({ ...hexToHsva(col), v: Math.min(hexToHsva(col).v + 10, 100), a: 0.3 })
-
-                                                        )
+                                                        e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
                                                     }}
                                                     onMouseLeave={(e) => {
                                                         e.currentTarget.style.backgroundColor = col
@@ -202,7 +189,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                     HSV: {getColorText(hexToHsva(col), "HSV")} <Copy size={12} />
                                                 </div>
                                                 <div
-                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2"
+                                                    className="cursor-pointer px-2 py-1 rounded-2xl flex items-center gap-2 transition-all"
                                                     onClick={async () => {
                                                         await navigator.clipboard.writeText(getColorText(rgbToCmyk(rgbaToRgb(hsvaToRgba(hexToHsva(col)))), "CMYK"));
                                                     }}
@@ -210,10 +197,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                                                         backgroundColor: col
                                                     }}
                                                     onMouseEnter={(e) => {
-                                                        e.currentTarget.style.backgroundColor = rgbaToHexa(
-                                                            hsvaToRgba({ ...hexToHsva(col), v: Math.min(hexToHsva(col).v + 10, 100), a: 0.3 })
-
-                                                        )
+                                                        e.currentTarget.style.backgroundColor = Color(col).isLight() ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)"
                                                     }}
                                                     onMouseLeave={(e) => {
                                                         e.currentTarget.style.backgroundColor = col

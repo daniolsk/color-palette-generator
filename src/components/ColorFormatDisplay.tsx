@@ -37,9 +37,8 @@ export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
                 {label}
             </div>
             <div
-                className="w-full items-center gap-8 flex px-4 py-2 text-lg border-2 rounded-2xl font-medium focus:outline-none cursor-pointer transition"
+                className="w-full shadow-lg items-center gap-8 flex px-4 py-2 text-lg rounded-2xl font-medium focus:outline-none cursor-pointer transition"
                 style={{
-                    borderColor: hsvaToHex({ ...color, v: 30 }),
                     backgroundColor: rgbaToHexa(hsvaToRgba({ ...color, a: 0.2 }))
                 }}
                 onMouseEnter={(e) => {
