@@ -11,7 +11,7 @@ const Home = () => {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <div className="p-6 text-center text-2xl font-medium tracking-tight shadow-lg" style={{
+            <div className="p-4 desktop:p-6 text-center text-xl desktop:text-2xl font-medium tracking-tight shadow-lg" style={{
                 backgroundColor: rgbaToHexa(
                     hsvaToRgba({
                         ...color,
