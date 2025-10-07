@@ -5,6 +5,7 @@ import {
 } from "@/lib/colors";
 import { BrightnessSlider } from "@/components/BrightnessSlider";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export const ColorPicker = ({ color, changeColor }: {
     color: HsvaColor, changeColor: (color: HsvaColor) => void
@@ -63,8 +64,12 @@ export const ColorPicker = ({ color, changeColor }: {
                     }}
                 />
                 <div
-                    className="aspect-square w-12 h-12 rounded-2xl shadow-lg"
+                    className="aspect-square w-12 h-12 rounded-2xl shadow-lg cursor-pointer"
                     style={{ backgroundColor: hsvaToHex(color) }}
+                    onClick={async () => {
+                        await navigator.clipboard.writeText(hsvaToHex(color));
+                        toast.success('Skopiowano do schowka!')
+                    }}
                 />
             </div>
             <div>

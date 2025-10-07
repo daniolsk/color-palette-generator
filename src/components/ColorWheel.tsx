@@ -7,7 +7,7 @@ function ColorWheel({ color, changeColor }: {
 }) {
     return (
         <Fragment>
-            <Wheel width={288} height={288} color={{ ...color, v: 100 }}
+            <Wheel style={{cursor: "pointer"}} width={288} height={288} color={{ ...color, v: 100 }}
                    onChange={(colorResult) => {
                        changeColor({ ...colorResult.hsva, v: color.v });
                    }}
