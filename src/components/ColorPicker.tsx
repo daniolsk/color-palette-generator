@@ -19,7 +19,18 @@ export const ColorPicker = ({ color, changeColor }: {
         const handler = setTimeout(() => {
             if (isValidHex(inputValue)) {
                 const newColor = hexToHsva("#" + inputValue);
-                changeColor(newColor);
+
+                const isSameColor = (c1: HsvaColor, c2: HsvaColor) =>
+                    Math.abs(c1.h - c2.h) < 0.1 &&
+                    Math.abs(c1.s - c2.s) < 0.1 &&
+                    Math.abs(c1.v - c2.v) < 0.1 &&
+                    Math.abs(c1.a - c2.a) < 0.01;
+
+                if (!isSameColor) {
+                    console.log(newColor, color);
+                    changeColor(newColor);
+                }
+
                 setInvalidHex(false);
             } else {
                 setInvalidHex(true);
@@ -27,14 +38,14 @@ export const ColorPicker = ({ color, changeColor }: {
         }, 500);
 
         return () => clearTimeout(handler);
-    }, [inputValue, changeColor]);
+    }, [inputValue, changeColor, color]); // dodajemy `color` do zależności
 
     useEffect(() => {
         setInputValue(hsvaToHex(color).substring(1));
     }, [color]);
 
     return (
-        <div className="gap-8 py-8 flex flex-col items-center justify-center desktop:sticky desktop:top-0">
+        <div className="gap-8 py-26 flex flex-col items-center justify-center desktop:sticky desktop:top-0">
             <div className="flex justify-center items-center gap-4">
                 <span className="font-medium text-2xl">#</span>
                 <input

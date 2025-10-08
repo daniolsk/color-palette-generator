@@ -1,5 +1,5 @@
 import {
-    CmykColor,
+    CmykColor, HexColor,
     hexToHsva,
     HslaColor,
     HsvaColor,
@@ -12,41 +12,16 @@ import {
     rgbToCmyk
 } from "@/lib/colors";
 import { Copy } from "lucide-react";
-import { useMemo, useState } from "react";
-import {
-    getMonochromatic,
-    getAnalogous,
-    getComplementary,
-    getSplitComplementary,
-    getTriad,
-    getTetradic
-} from "@/lib/colorSchemes";
+import { useState } from "react";
 import Color from "color";
 import toast from "react-hot-toast";
 
-export const Palette = ({ color }: { color: HsvaColor }) => {
-    const [harmony, setHarmony] = useState<string>("analogous");
+export const Palette = ({ color, palette, setHarmony}: {
+    color: HsvaColor,
+    palette: HexColor[],
+    setHarmony: (harmony: string) => void
+}) => {
     const [hoveredIndex, setHoveredIndex] = useState<number|null>(null);
-
-    const palette = useMemo(() => {
-        const colorHex = hsvaToHex(color);
-        switch (harmony) {
-            case "monochromatic":
-                return getMonochromatic(colorHex);
-            case "analogous":
-                return getAnalogous(colorHex);
-            case "complementary":
-                return getComplementary(colorHex);
-            case "split-complementary":
-                return getSplitComplementary(colorHex);
-            case "triadic":
-                return getTriad(colorHex);
-            case "tetradic":
-                return getTetradic(colorHex);
-            default:
-                return getMonochromatic(colorHex);
-        }
-    }, [harmony, color]);
 
     const getColorText = (color: RgbaColor | HslaColor | HsvaColor | CmykColor, format: string) => {
         switch (format) {
@@ -104,7 +79,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                     <option value="tetradic">Tetradyczna (kwadratowa)</option>
                 </select>
             </div>
-            <div className="desktop:px-8 w-full flex-1">
+            <div className="w-full flex-1">
                 <div className="flex h-full flex-col bg-white rounded-2xl w-full items-center">
                     <h2 className="mt-8 text-xl font-medium">Twoja paleta barw:</h2>
                     <div className={`grid grid-cols-1 ${palette.length <= 3 ? 'desktop:grid-cols-1' : 'desktop:grid-cols-2'} auto-rows-fr gap-4 p-6 w-full h-full transition-all`}>
@@ -116,7 +91,7 @@ export const Palette = ({ color }: { color: HsvaColor }) => {
                             return (
                                 <div
                                     key={i}
-                                    className="relative w-full min-h-48 font-medium text-xl rounded-2xl flex items-center justify-center p-2 overflow-hidden transition-all"
+                                    className={`${i === 0 ? 'desktop:col-span-2' : null} relative w-full min-h-48 font-medium text-xl rounded-2xl flex items-center justify-center p-2 overflow-hidden transition-all`}
                                     style={{ backgroundColor: col, color: textColor }}
                                     onMouseEnter={() => setHoveredIndex(i)}
                                     onMouseLeave={() => setHoveredIndex(null)}
