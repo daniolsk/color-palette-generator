@@ -1,6 +1,6 @@
 import Color from "color";
 
-const extendColors = (colors: string[], count: number): string[] => {
+const extendColors = (colors: string[], count: number, allowHueChange?: boolean): string[] => {
     if (colors.length === 0) return [];
 
     const result = [colors[0]]; // pierwszy kolor zawsze bazowy
@@ -16,7 +16,7 @@ const extendColors = (colors: string[], count: number): string[] => {
         const lightShift = (Math.random() * 40) - 20;
 
         const newCol = baseColor
-            .rotate(hueShift)
+            .rotate(allowHueChange ? hueShift : 0)
             .saturationl(Math.min(100, Math.max(0, baseColor.saturationl() + satShift)))
             .lightness(Math.min(100, Math.max(0, baseColor.lightness() + lightShift)));
 
@@ -72,5 +72,5 @@ export const getMonochromatic = (colorInput: string, count: number = 4): string[
         baseSet.push(Color({ h: base.h, s, l: base.l }).hex());
     }
 
-    return extendColors(baseSet, count);
+    return extendColors(baseSet, count, false);
 };

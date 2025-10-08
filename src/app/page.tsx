@@ -22,8 +22,12 @@ const Home = () => {
     const [harmony, setHarmony] = useState<string>("analogous");
 
     useEffect(() => {
-        console.log(color, harmony)
         const colorHex = hsvaToHex(color);
+
+        setPalette(getNewPalette(colorHex, harmony) as HexColor[]);
+    }, [color, harmony]);
+
+    const getNewPalette = (colorHex: string, harmony: string) => {
         let newPalette: string[];
 
         switch (harmony) {
@@ -49,8 +53,8 @@ const Home = () => {
                 newPalette = getMonochromatic(colorHex, 5);
         }
 
-        setPalette(newPalette as HexColor[]);
-    }, [color, harmony]);
+        return newPalette;
+    }
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -66,7 +70,7 @@ const Home = () => {
             }}>Generator palet barw</div>
             <div className="grid grid-cols-1 gap-16 desktop:grid-cols-2 items-start flex-1 px-4 py-4 xl:mx-auto xl:w-[1280px]">
                 <ColorPicker color={color} changeColor={setColor} />
-                <Palette palette={palette} setHarmony={setHarmony} color={color} />
+                <Palette palette={palette} setHarmony={setHarmony} color={color} refreshPalette={() => setPalette(getNewPalette(hsvaToHex(color), harmony)  as HexColor[])} />
             </div>
             <div className="justify-center flex gap-4 items-center">
                 <span>Przesuń niżej aby zobaczyć wizualizacje</span>

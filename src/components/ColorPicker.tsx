@@ -38,7 +38,7 @@ export const ColorPicker = ({ color, changeColor }: {
         }, 500);
 
         return () => clearTimeout(handler);
-    }, [inputValue, changeColor, color]); // dodajemy `color` do zależności
+    }, [inputValue, changeColor, color]);
 
     useEffect(() => {
         setInputValue(hsvaToHex(color).substring(1));

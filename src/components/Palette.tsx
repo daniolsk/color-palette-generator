@@ -11,15 +11,16 @@ import {
     rgbaToRgb,
     rgbToCmyk
 } from "@/lib/colors";
-import { Copy } from "lucide-react";
+import { Copy, RefreshCcw } from "lucide-react";
 import { useState } from "react";
 import Color from "color";
 import toast from "react-hot-toast";
 
-export const Palette = ({ color, palette, setHarmony}: {
+export const Palette = ({ color, palette, setHarmony, refreshPalette}: {
     color: HsvaColor,
     palette: HexColor[],
-    setHarmony: (harmony: string) => void
+    setHarmony: (harmony: string) => void,
+    refreshPalette: () => void
 }) => {
     const [hoveredIndex, setHoveredIndex] = useState<number|null>(null);
 
@@ -81,7 +82,10 @@ export const Palette = ({ color, palette, setHarmony}: {
             </div>
             <div className="w-full flex-1">
                 <div className="flex h-full flex-col bg-white rounded-2xl w-full items-center">
-                    <h2 className="mt-8 text-xl font-medium">Twoja paleta barw:</h2>
+                    <div className="items-center flex justify-between w-full px-6 pt-6">
+                        <h2 className="text-xl font-medium">Twoja paleta barw:</h2>
+                        <RefreshCcw className="hover:rotate-120 transition-all active:scale-105 cursor-pointer" onClick={() => refreshPalette()} />
+                    </div>
                     <div className={`grid grid-cols-1 ${palette.length <= 3 ? 'desktop:grid-cols-1' : 'desktop:grid-cols-2'} auto-rows-fr gap-4 p-6 w-full h-full transition-all`}>
                         {palette.map((col, i) => {
                             const textColor = hoveredIndex === i
