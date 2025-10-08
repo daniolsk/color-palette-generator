@@ -5,7 +5,7 @@ import { Palette } from "@/components/Palette";
 import { ColorPicker } from "@/components/ColorPicker";
 import { Toaster } from 'react-hot-toast';
 import { HexColor, HsvaColor, hsvaToHex, hsvaToRgba, rgbaToHexa } from "@/lib/colors";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowUp, RefreshCcw } from "lucide-react";
 import { LandingPageVisualization } from "@/components/LandingPageVisualization";
 import {
     getAnalogous,
@@ -15,17 +15,30 @@ import {
     getTetradic,
     getTriad
 } from "@/lib/colorSchemes";
+import { BusinessCardVisualization } from "@/components/BusinessCardVisualization";
 
 const Home = () => {
     const [color, setColor] = useState<HsvaColor>({ h: 143, s: 100, v: 100, a: 1 });
     const [palette, setPalette] = useState<HexColor[]>([]);
     const [harmony, setHarmony] = useState<string>("analogous");
+    const [showRefresh, setShowRefresh] = useState(false);
 
     useEffect(() => {
         const colorHex = hsvaToHex(color);
 
         setPalette(getNewPalette(colorHex, harmony) as HexColor[]);
     }, [color, harmony]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+            const oneVH = window.innerHeight * 0.5;
+            setShowRefresh(scrollY >= oneVH);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const getNewPalette = (colorHex: string, harmony: string) => {
         let newPalette: string[];
@@ -59,6 +72,14 @@ const Home = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Toaster />
+            <div className={`${showRefresh ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} gap-2 flex fixed right-4 top-4 transition-all justify-center items-center z-40`}>
+                <div className="p-4 bg-white rounded-2xl shadow-lg" onClick={() => setPalette(getNewPalette(hsvaToHex(color), harmony)  as HexColor[])}>
+                    <RefreshCcw className="hover:rotate-120 cursor-pointer transition-all active:scale-105" />
+                </div>
+                <div className="p-4 bg-white rounded-2xl shadow-lg" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                    <ArrowUp className="cursor-pointer transition-all active:scale-105" />
+                </div>
+            </div>
             <div className="p-4 desktop:p-6 text-center text-xl desktop:text-2xl font-medium tracking-tight shadow-lg" style={{
                 backgroundColor: rgbaToHexa(
                     hsvaToRgba({
@@ -85,7 +106,7 @@ const Home = () => {
             <div className="max-w-[1280px] mx-auto w-full mb-8 mt-16 flex flex-col gap-2">
                 <div className="tracking-tighter text-gray-600"><span className="font-bold">#2</span> Przykładowe grafiki</div>
                 <div className="bg-white p-4 rounded-2xl">
-                    <LandingPageVisualization palette={palette} />
+                    <BusinessCardVisualization palette={palette} />
                 </div>
             </div>
             <div className="p-4 text-center">Made with ❤️ by Daniel Skowron</div>
