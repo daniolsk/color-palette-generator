@@ -1,6 +1,6 @@
 import Color from "color";
 
-const extendColors = (colors: string[], count: number, allowHueChange?: boolean): string[] => {
+const extendColors = (colors: string[], count: number, allowHueChange: boolean = true): string[] => {
     if (colors.length === 0) return [];
 
     const result = [colors[0]]; // pierwszy kolor zawsze bazowy
