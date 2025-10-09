@@ -16,6 +16,7 @@ import {
     getTriad
 } from "@/lib/colorSchemes";
 import { BusinessCardVisualization } from "@/components/BusinessCardVisualization";
+import { StickersVisualization } from "@/components/StickersVisualization";
 
 const Home = () => {
     const [color, setColor] = useState<HsvaColor>({ h: 143, s: 100, v: 100, a: 1 });
@@ -98,15 +99,25 @@ const Home = () => {
                 <ArrowDown className="animate-bounce" />
             </div>
             <div className="max-w-[1280px] px-4 mx-auto w-full mb-8 mt-32 flex flex-col gap-2">
-                <div className="tracking-tighter text-gray-600"><span className="font-bold">#1</span> Przykładowa strona początkowa</div>
+                <div className="tracking-tighter text-gray-600"><span className="font-bold mr-1">#1</span>
+                    Strona początkowa
+                </div>
                 <div className="bg-white p-4 rounded-2xl">
                     <LandingPageVisualization palette={palette} />
                 </div>
             </div>
             <div className="max-w-[1280px] px-4 mx-auto w-full mb-8 mt-16 flex flex-col gap-2">
-                <div className="tracking-tighter text-gray-600"><span className="font-bold">#2</span> Wizytówka</div>
+                <div className="tracking-tighter text-gray-600"><span className="font-bold mr-1">#2</span> Wizytówka
+                </div>
                 <div className="bg-white p-4 rounded-2xl z-0 pb-64">
                     <BusinessCardVisualization palette={palette} />
+                </div>
+            </div>
+            <div className="max-w-[1280px] px-4 mx-auto w-full mb-8 mt-16 flex flex-col gap-2">
+                <div className="tracking-tighter text-gray-600"><span className="font-bold mr-1">#3</span> Naklejki
+                </div>
+                <div className="bg-white p-4 rounded-2xl">
+                    <StickersVisualization palette={palette} />
                 </div>
             </div>
             <div className="p-4 text-center">Made with ❤️ by Daniel Skowron</div>
