@@ -4,7 +4,8 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
     return (
         <section className="grid grid-cols-3 grid-rows-2 items-center justify-items-center">
             <div className="p-20 flex justify-center items-center">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="902.41854" height="826.20679"
+                <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="902.41854"
+                     height="826.20679"
                      viewBox="0 0 902.41854 826.20679">
                     <path
                         d="M726.94952,696.70767l8.67165,19.44392c-7.04887-1.12221-13.60391,4.89778-13.75121,12.62878s6.13979,15.77421,13.18911,16.8731c-1.34708,6.00231-7.16088,8.64855-12.20732,11.07451s-10.48544,6.44956-10.11,12.84517c.30146,5.13535,4.548,9.66922,9.05769,11.49215s9.24135,1.54272,13.80858,1.23684c-6.921,7.23984-7.59561,20.84776-1.51747,30.61081s18.21665,14.56912,27.30539,10.8112c-6.42186,7.98853-5.02668,22.61792,2.94328,30.86218,8.03432,8.31083,19.678,9.11525,29.85706,8.23972a132.23791,132.23791,0,0,0,71.00684-28.14c7.78173-6.1834,15.05042-13.45556,19.48953-22.94127s5.747-21.49572,1.61222-32.29045c1.1152,13.52239,14.64995,24.20276,26.82589,24.80038s22.80664-6.26052,31.84054-14.08111c12.014-10.40049,23.13736-24.9791,21.48841-42.967-.81631-8.90487-4.70578-17.46936-8.52054-25.765l-7.39565-16.08273c-2.98571-6.49278-6.03914-13.09517-10.53293-18.54375s-10.73125-9.66651-16.97307-9.62643c1.42718-6.5202,2.86077-13.28339,1.66478-20.211s-5.77577-14.10054-12.00424-15.72285c-7.92682-2.06468-14.6448,5.25038-22.6158,4.56081-7.67069-.6636-14.01-8.362-21.45871-11.4124a17.17785,17.17785,0,0,0-18.53718,3.20639c-4.722,4.6097-6.69032,12.39794-4.99586,19.76719,1.48435,6.45545,5.43465,12.14909,7.83232,18.37489s2.76983,14.231-1.8351,17.63129c-5.55664,4.103-14.01442-1.48021-18.35566-8.23484s-6.83379-14.93336-12.32361-20.614c-6.47924-6.70451-16.62148-8.27573-23.29257-3.60845s-9.22234,15.11922-5.85919,24.00383c2.74987,7.26449,9.04909,14.6135,6.86437,21.45428-2.309,7.2298-12.41262,6.31432-18.50707,1.20471s-10.14111-12.8059-16.16143-18.03027c-6.114-5.30562-14.09812-7.63035-21.10721-6.14573a21.73057,21.73057,0,0,0-15.57311,13.9151"
@@ -127,7 +128,8 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                 </svg>
             </div>
             <div className="p-12 flex justify-center items-center">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="880" height="813.325"
+                <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="880"
+                     height="813.325"
                      viewBox="0 0 880 813.325">
                     <g id="Group_83" data-name="Group 83" transform="translate(-519.736 -95.892)">
                         <path id="Path_1317-2236" data-name="Path 1317"
@@ -285,7 +287,8 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                 </svg>
             </div>
             <div className="p-12 flex justify-center items-center">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="766.14608" height="604.79838"
+                <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="766.14608"
+                     height="604.79838"
                      viewBox="0 0 766.14608 604.79838" role="img">
                     <path
                         d="M659.91574,604.79838H106.23034c-58.57465,0-106.23034-7.65569-106.23034-66.23034s47.65569-86.76966,106.23034-86.76966H659.91574c58.57465,0,106.23034,28.19501,106.23034,86.76966s-47.65569,66.23034-106.23034,66.23034Z"
@@ -378,7 +381,8 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                 </svg>
             </div>
             <div className="p-12 flex justify-center items-center">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="692.60517" height="748.73305"
+                <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="692.60517"
+                     height="748.73305"
                      viewBox="0 0 692.60517 748.73305">
                     <circle cx="485.38885" cy="252.48956" r="75.36532" fill={palette[1]} />
                     <path
@@ -450,7 +454,8 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                 </svg>
             </div>
             <div className="p-12 flex justify-center items-center">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="713" height="847.85985"
+                <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="713"
+                     height="847.85985"
                      viewBox="0 0 713 847.85985"><title>cabin</title>
                     <path
                         d="M482.08,603.40047a122.5375,122.5375,0,0,0,5.13995,12.38v.01q2.355,4.92,5.12006,9.59H707.36v.43q2.925-4.875,5.38-10.04a120.09911,120.09911,0,0,0,5.14-12.37Zm5.42,12.25v-2H712.49v2Zm16.76,26.54H695.7a125.03246,125.03246,0,0,0,10.71-14.81H493.55A125.04086,125.04086,0,0,0,504.26,642.19051Z"
@@ -576,7 +581,8 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                 </svg>
             </div>
             <div className="p-12 flex justify-center items-center">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="1106" height="783.42853"
+                <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="1106"
+                     height="783.42853"
                      viewBox="0 0 1106 783.42853"><title>happy women day</title>
                     <path
                         d="M902.08458,367.67256C857.16819,191.05111,701.96793,63.55512,519.7964,58.44137c-96.30863-2.70348-197.65219,29.2378-271.43777,141.012-131.89969,199.80845,8.10555,337.88223,105.7135,403.49213a610.75747,610.75747,0,0,1,126.24112,113.4651c65.931,78.23772,192.76719,175.45908,343.82337,23.12816C933.62233,629.12911,932.00333,485.31989,902.08458,367.67256Z"

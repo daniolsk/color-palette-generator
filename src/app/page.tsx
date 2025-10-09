@@ -109,7 +109,7 @@ const Home = () => {
             <div className="max-w-[1280px] px-4 mx-auto w-full mb-8 mt-16 flex flex-col gap-2">
                 <div className="tracking-tighter text-gray-600"><span className="font-bold mr-1">#2</span> Wizytówka
                 </div>
-                <div className="bg-white p-4 rounded-2xl z-0 pb-64">
+                <div className="bg-white p-4 rounded-2xl z-0 pb-68 pt-8">
                     <BusinessCardVisualization palette={palette} />
                 </div>
             </div>
