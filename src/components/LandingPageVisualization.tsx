@@ -29,8 +29,8 @@ export const LandingPageVisualization = ({ palette }: { palette: HexColor[] }) =
             </header>
             <main className="grid flex-1 grid-cols-2 items-center py-8">
                 <div className="px-16">
-                    <div className="text-5xl font-bold tracking-tighter">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <div className="text-5xl font-extrabold tracking-tighter">
+                        Lorem ipsum dolor, consectetur adipiscing elit.{" "}
                         <span className="text-red-900" style={{
                             color: palette[0],
                         }}

@@ -2,12 +2,12 @@ import { HexColor } from "@/lib/colors";
 
 export const BusinessCardVisualization = ({ palette }: { palette: HexColor[] }) => {
     return (
-        <section className="grid grid-cols-3 grid-rows-2">
-            <div className="col-start-2 col-span-2 grid grid-cols-2 p-4">
-                <div className="rounded-l-2xl shadow-lg">
+        <section className="flex flex-col relative">
+            <div className="grid grid-cols-2 p-4 mr-24 ml-96 z-20">
+                <div className="rounded-l-2xl shadow-lg/20 bg-white">
                     <main className="flex flex-col justify-center px-8 py-16 h-full">
                         <div className="text-5xl flex-1 font-extrabold tracking-tighter">
-                            DESIGN STUDIO
+                            DESIGN STUDIO.
                         </div>
                         <div className="mt-4">
                             <div className="text-xl font-bold tracking-tighter mt-4">DANIEL SKOWRON</div>
@@ -25,7 +25,8 @@ export const BusinessCardVisualization = ({ palette }: { palette: HexColor[] }) 
                         </div>
                     </main>
                 </div>
-                <svg className="w-full h-full shadow-lg rounded-r-2xl" width="743" height="1024" viewBox="0 0 743 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-full h-full shadow-lg/20 rounded-r-2xl" width="743" height="1024"
+                     viewBox="0 0 743 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_60_24)">
                         <rect width="743" height="1024" transform="translate(743 1024) rotate(-180)" fill={palette[3]}/>
                         <path d="M1336.5 315L746.5 1164.5L672.5 1273L-93.5 1250.5L-256 745C-288.5 491.333 -233.4 -33.5001 247 -103.5C727.4 -173.5 1173.5 146.333 1336.5 315Z" fill={palette[2]} fill-opacity="0.7"/>
@@ -41,8 +42,9 @@ export const BusinessCardVisualization = ({ palette }: { palette: HexColor[] }) 
                     </defs>
                 </svg>
             </div>
-            <div className="col-start-1 col-span-2 p-4">
-                <svg className="w-full h-full shadow-lg rounded-2xl" width="1486" height="1024" viewBox="0 0 1486 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className="p-4 mr-96 ml-24 absolute top-60 left-0 z-10">
+                <svg className="w-full h-full shadow-lg/20 rounded-2xl" width="1486" height="1024"
+                     viewBox="0 0 1486 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_57_2)">
                         <rect width="1486" height="1024" fill={palette[3]}/>
                         <path d="M168.5 709L758.5 -140.5L832.5 -249L1598.5 -226.5L1761 279C1793.5 532.667 1738.4 1057.5 1258 1127.5C777.6 1197.5 331.5 877.667 168.5 709Z" fill={palette[2]} fill-opacity="0.7"/>
