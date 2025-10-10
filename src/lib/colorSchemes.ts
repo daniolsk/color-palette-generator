@@ -1,76 +1,108 @@
 import Color from "color";
 
-const extendColors = (colors: string[], count: number, allowHueChange: boolean = true): string[] => {
-    if (colors.length === 0) return [];
+// --- Pomocnicza funkcja do lekkiej modyfikacji kolorów ---
+const slightlyModify = (hex: string, strength: number = 8): string => {
+    const c = Color(hex).hsl().object();
 
-    const result = [colors[0]]; // pierwszy kolor zawsze bazowy
-    const len = colors.length;
-    let i = 0; // indeks do przechodzenia po pozostałych kolorach
+    const randomDelta = () => {
+        const sign = Math.random() < 0.5 ? -1 : 1;
+        const value = Math.random() * strength; // ±strength
+        return sign * value;
+    };
 
-    while (result.length < count) {
-        const baseColor = Color(colors[i % len]).hsl();
+    const clamp = (v: number) => Math.max(0, Math.min(100, v));
 
-        // losowa modyfikacja: hue ±30°, saturation ±20%, lightness ±20%
-        const hueShift = (Math.random() * 60) - 30;
-        const satShift = (Math.random() * 40) - 20;
-        const lightShift = (Math.random() * 40) - 20;
-
-        const newCol = baseColor
-            .rotate(allowHueChange ? hueShift : 0)
-            .saturationl(Math.min(100, Math.max(0, baseColor.saturationl() + satShift)))
-            .lightness(Math.min(100, Math.max(0, baseColor.lightness() + lightShift)));
-
-        result.push(newCol.hex());
-        i++;
-    }
-
-    return result.slice(0, count);
+    return Color({
+        h: c.h,
+        s: clamp(c.s + randomDelta()),
+        l: clamp(c.l + randomDelta())
+    }).hex();
 };
 
-// --- Generatory palet ---
+// --- Generatory palet (3 kolory: dominujący, dodatkowy, akcent) ---
 
-export const getComplementary = (colorInput: string, count: number = 2): string[] => {
-    const baseSet = [colorInput, Color(colorInput).rotate(180).hex()];
-    return extendColors(baseSet, count);
+export const getComplementary = (colorInput: string): string[] => {
+    const base = Color(colorInput);
+    const complementary = base.rotate(180);
+
+    // kolor pośredni między bazowym a dopełniającym
+    const baseHSL = base.hsl().object();
+    const compHSL = complementary.hsl().object();
+    const mid = Color({
+        h: (
+            baseHSL.h + compHSL.h
+        ) / 2,
+        s: (
+            baseHSL.s + compHSL.s
+        ) / 2,
+        l: (
+            baseHSL.l + compHSL.l
+        ) / 2
+    });
+
+    // 60 / 30 / 10 – dominujący / dodatkowy / akcent
+    return [
+        base.hex(),                   // dominujący
+        slightlyModify(mid.hex(), 6), // dodatkowy
+        slightlyModify(complementary.hex(), 10) // akcent
+    ];
 };
 
-export const getTriad = (colorInput: string, count: number = 3): string[] => {
+export const getTriad = (colorInput: string): string[] => {
     const base = Color(colorInput).hsl();
-    const step = 360 / 3;
-    const baseSet = [colorInput, ...Array.from({ length: 2 }, (_, i) => base.rotate((i+1) * step).hex())];
-    return extendColors(baseSet, count);
+    const step = 120; // triada = 120° odstępu
+    const second = base.rotate(step);
+    const third = base.rotate(2 * step);
+
+    return [
+        base.hex(),
+        slightlyModify(second.hex(), 6),
+        slightlyModify(third.hex(), 10)
+    ];
 };
 
-export const getAnalogous = (colorInput: string, count: number = 4, range: number = 90): string[] => {
+export const getAnalogous = (colorInput: string, range: number = 30): string[] => {
     const base = Color(colorInput).hsl();
-    const step = range / (count - 1);
-    const start = -range / 2;
-    const baseSet = [colorInput, ...Array.from({ length: count - 1 }, (_, i) =>
-        base.rotate(start + (i+1) * step).hex()
-    )];
-    return extendColors(baseSet, count);
+    const left = base.rotate(-range);
+    const right = base.rotate(range);
+
+    return [
+        base.hex(),
+        slightlyModify(left.hex(), 6),
+        slightlyModify(right.hex(), 8)
+    ];
 };
 
-export const getSplitComplementary = (colorInput: string, count: number = 3): string[] => {
-    const baseSet = [colorInput, Color(colorInput).rotate(-150).hex(), Color(colorInput).rotate(150).hex()];
-    return extendColors(baseSet, count);
+export const getSplitComplementary = (colorInput: string): string[] => {
+    const base = Color(colorInput);
+    const left = base.rotate(-150);
+    const right = base.rotate(150);
+
+    return [
+        base.hex(),
+        slightlyModify(left.hex(), 6),
+        slightlyModify(right.hex(), 10)
+    ];
 };
 
-export const getTetradic = (colorInput: string, count: number = 4): string[] => {
-    const base = Color(colorInput).hsl();
-    const step = 360 / 4;
-    const baseSet = [colorInput, ...Array.from({ length: 3 }, (_, i) => base.rotate((i+1) * step).hex())];
-    return extendColors(baseSet, count);
-};
-
-export const getMonochromatic = (colorInput: string, count: number = 4): string[] => {
+export const getMonochromatic = (colorInput: string): string[] => {
     const base = Color(colorInput).hsl().object();
-    const baseSet: string[] = [colorInput];
 
-    for (let i = 1; i < count; i++) {
-        const s = (i / count) * 100;
-        baseSet.push(Color({ h: base.h, s, l: base.l }).hex());
-    }
+    const lighter = Color({
+        h: base.h,
+        s: base.s,
+        l: Math.min(100, base.l + 20)
+    });
 
-    return extendColors(baseSet, count, false);
+    const darker = Color({
+        h: base.h,
+        s: base.s,
+        l: Math.max(0, base.l - 20)
+    });
+
+    return [
+        Color(base).hex(),
+        slightlyModify(lighter.hex(), 5),
+        slightlyModify(darker.hex(), 8)
+    ];
 };
