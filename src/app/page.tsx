@@ -22,6 +22,7 @@ import {
 } from "@/lib/colorSchemes";
 import { BusinessCardVisualization } from "@/components/BusinessCardVisualization";
 import { StickersVisualization } from "@/components/StickersVisualization";
+import { Tooltip } from "react-tooltip";
 
 const Home = () => {
     const [color, setColor] = useState<HsvaColor>({
@@ -96,6 +97,17 @@ const Home = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Toaster />
+            <Tooltip
+                id="cmyk-tooltip"
+                place="bottom"
+                style={{
+                    borderRadius: "16px",
+                    zIndex: "999999",
+                    maxWidth: "320px"
+                }}
+            >
+                Kolory w przestrzeni barw CMYK mogą odbiegać od ich odpowiedników w innych formatach.
+            </Tooltip>
             <div
                 className={`${
                     showRefresh

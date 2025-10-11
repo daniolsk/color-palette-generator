@@ -1,7 +1,8 @@
 import {
     hsvaToHex, HsvaColor, hsvaToRgba, rgbaToHexa, HslaColor, CmykColor, RgbaColor
 } from "@/lib/colors";
-import { Copy } from "lucide-react";
+import { Tooltip } from "react-tooltip";
+import { Copy, TriangleAlert } from "lucide-react";
 import toast from "react-hot-toast";
 
 export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
@@ -37,7 +38,12 @@ export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
         <div className="relative group">
             <div className="text-sm text-gray-600 mb-0.5">
                 {label === "CMYK" ? (
-                    `${label}*`
+                    <div className="flex items-center justify-between">
+                        <div>{label}</div>
+                        <div data-tooltip-id="cmyk-tooltip" className="text-gray-600 cursor-help">
+                            <TriangleAlert size={16} strokeWidth={1.5} />
+                        </div>
+                    </div>
                 ) : label}
             </div>
             <div
@@ -60,12 +66,12 @@ export const ColorFormatDisplay = ({ color, colorInFormat, label }: {
                 <div className="flex-1">{getColorText()}</div>
                 <Copy className="size-3 lg:size-4" />
             </div>
-            {label === "CMYK" ? (
-                <div
-                    className="absolute top-[100%] left-0 text-sm text-gray-600 mt-1 p-2 rounded-2xl pointer-events-none opacity-0 cursor transition-all group-hover:opacity-100">
-                    * Kolory w przestrzeni barw CMYK mogą odbiegać od ich odpowiedników w innych formatach.
-                </div>
-            ) : null}
+            {/*{label === "CMYK" ? (*/}
+            {/*    <div*/}
+            {/*        className="absolute top-[100%] left-0 text-sm text-gray-600 mt-1 p-2 rounded-2xl pointer-events-none opacity-0 cursor transition-all group-hover:opacity-100">*/}
+            {/*        * Kolory w przestrzeni barw CMYK mogą odbiegać od ich odpowiedników w innych formatach.*/}
+            {/*    </div>*/}
+            {/*) : null}*/}
         </div>
     );
 };
