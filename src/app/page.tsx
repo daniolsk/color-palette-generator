@@ -106,9 +106,9 @@ const Home = () => {
                 <div
                     className="p-4 bg-white rounded-2xl shadow-lg"
                     onClick={() =>
-                        setPalette(getNewPalette(hsvaToHex(hslaToHsva(
+                        setColor(hslaToHsva(
                             randomHslaColor(0, 359, 10, 90, 40, 60)
-                        )), harmony) as HexColor[])
+                        ))
                     }
                 >
                     <Dice5
@@ -131,7 +131,7 @@ const Home = () => {
                 </div>
             </div>
             <div
-                className="p-4 desktop:p-6 text-center text-xl desktop:text-2xl font-medium tracking-tight shadow-lg"
+                className="p-4 desktop:p-6 shadow-lg"
                 style={{
                     backgroundColor: rgbaToHexa(
                         hsvaToRgba({
@@ -142,7 +142,14 @@ const Home = () => {
                     )
                 }}
             >
-                Generator palet barw
+                <div className="max-w-[1280px] mx-auto flex justify-between items-center">
+                    <div className="text-xl desktop:text-2xl font-medium tracking-tighter">
+                        Generator palet barw
+                    </div>
+                    <div className="text-lg desktop:text-xl py-2 px-3 cursor-pointer">
+                        Jak to działa?
+                    </div>
+                </div>
             </div>
             <div
                 className="grid grid-cols-1 gap-8 desktop:grid-cols-2 items-start flex-1 px-4 py-4 xl:mx-auto xl:w-[1280px]">
@@ -152,16 +159,16 @@ const Home = () => {
                     setHarmony={setHarmony}
                     color={color}
                     setRandomColor={() => {
-                        setPalette(getNewPalette(hsvaToHex(hslaToHsva(
+                        setColor(hslaToHsva(
                             randomHslaColor(0, 359, 10, 90, 40, 60)
-                        )), harmony) as HexColor[]);
+                        ))
                     }}
                     refreshPalette={() =>
                         setPalette(getNewPalette(hsvaToHex(color), harmony) as HexColor[])
                     }
                 />
             </div>
-            <div className="justify-center flex gap-4 items-center">
+            <div className="justify-center flex text-lg gap-4 items-center">
                 <span>Przesuń niżej aby zobaczyć wizualizacje</span>
                 <ArrowDown className="animate-bounce" />
             </div>
