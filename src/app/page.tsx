@@ -5,13 +5,13 @@ import { Palette } from "@/components/Palette";
 import { ColorPicker } from "@/components/ColorPicker";
 import { Toaster } from 'react-hot-toast';
 import {
-    HexColor,
+    HexColor, hslaToHsva,
     HsvaColor,
     hsvaToHex,
-    hsvaToRgba,
+    hsvaToRgba, randomHslaColor,
     rgbaToHexa
 } from "@/lib/colors";
-import { ArrowDown, ArrowUp, RefreshCcw } from "lucide-react";
+import { ArrowDown, ArrowUp, Dice5, RefreshCcw } from "lucide-react";
 import { LandingPageVisualization } from "@/components/LandingPageVisualization";
 import {
     getAnalogous,
@@ -106,6 +106,18 @@ const Home = () => {
                 <div
                     className="p-4 bg-white rounded-2xl shadow-lg"
                     onClick={() =>
+                        setPalette(getNewPalette(hsvaToHex(hslaToHsva(
+                            randomHslaColor(0, 359, 10, 90, 40, 60)
+                        )), harmony) as HexColor[])
+                    }
+                >
+                    <Dice5
+                        className="hover:-translate-y-1 transition-all active:scale-105 cursor-pointer"
+                    />
+                </div>
+                <div
+                    className="p-4 bg-white rounded-2xl shadow-lg"
+                    onClick={() =>
                         setPalette(getNewPalette(hsvaToHex(color), harmony) as HexColor[])
                     }
                 >
@@ -139,6 +151,11 @@ const Home = () => {
                     palette={palette}
                     setHarmony={setHarmony}
                     color={color}
+                    setRandomColor={() => {
+                        setPalette(getNewPalette(hsvaToHex(hslaToHsva(
+                            randomHslaColor(0, 359, 10, 90, 40, 60)
+                        )), harmony) as HexColor[]);
+                    }}
                     refreshPalette={() =>
                         setPalette(getNewPalette(hsvaToHex(color), harmony) as HexColor[])
                     }

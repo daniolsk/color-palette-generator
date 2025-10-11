@@ -48,6 +48,22 @@ export interface XYColor {
     bri?: number;
 }
 
+export const randomHslaColor = (minH: number, maxH: number, minS: number, maxS: number, minL: number, maxL: number) => {
+    const randomInRange = (min: number, max: number) =>
+        Math.random() * (
+            max - min
+        ) + min;
+
+    const randomColor: HslaColor = {
+        h: randomInRange(minH, maxH),
+        s: randomInRange(minS, maxS),
+        l: randomInRange(minL, maxL),
+        a: 1
+    };
+
+    return randomColor;
+};
+
 /**
  * ```js
  * rgbaToHsva({ r: 255, g: 255, b: 255, a: 1 }) //=> { h: 0, s: 0, v: 100, a: 1 }

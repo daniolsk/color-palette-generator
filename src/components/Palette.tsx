@@ -4,7 +4,6 @@ import {
 	hexToHsva,
 	HslaColor,
 	HsvaColor,
-	hsvaToHex,
 	hsvaToHsla,
 	hsvaToRgba,
 	RgbaColor,
@@ -12,7 +11,7 @@ import {
 	rgbaToRgb,
 	rgbToCmyk,
 } from '@/lib/colors';
-import { Copy, RefreshCcw } from 'lucide-react';
+import { Copy, Dice5, RefreshCcw } from "lucide-react";
 import { useState } from 'react';
 import Color from 'color';
 import toast from 'react-hot-toast';
@@ -22,11 +21,13 @@ export const Palette = ({
 	palette,
 	setHarmony,
 	refreshPalette,
+    setRandomColor
 }: {
 	color: HsvaColor;
 	palette: HexColor[];
 	setHarmony: (harmony: string) => void;
 	refreshPalette: () => void;
+    setRandomColor: () => void;
 }) => {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -115,10 +116,16 @@ export const Palette = ({
 				<div className='flex h-full flex-col bg-white rounded-2xl w-full items-center'>
 					<div className='items-center flex justify-between w-full px-6 pt-6'>
 						<h2 className='text-xl font-medium'>Twoja paleta barw:</h2>
-						<RefreshCcw
-							className='hover:rotate-120 transition-all active:scale-105 cursor-pointer'
-							onClick={() => refreshPalette()}
-						/>
+                        <div className="flex gap-4 items-center">
+                            <Dice5
+                                className="hover:-translate-y-1 transition-all active:scale-105 cursor-pointer"
+                                onClick={() => setRandomColor()}
+                            />
+                            <RefreshCcw
+                                className="hover:rotate-120 transition-all active:scale-105 cursor-pointer"
+                                onClick={() => refreshPalette()}
+                            />
+                        </div>
 					</div>
 					<div
 						className={`grid grid-cols-1 desktop:grid-cols-6 auto-rows-fr gap-4 p-6 w-full h-full transition-all`}
