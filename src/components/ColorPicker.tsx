@@ -17,7 +17,7 @@ export const ColorPicker = ({ color, changeColor }: {
 
     useEffect(() => {
         const handler = setTimeout(() => {
-            if (isValidHex(inputValue)) {
+            if (isValidHex(inputValue) || isValidHex(inputValue.substring(1))) {
                 const newColor = hexToHsva("#" + inputValue);
 
                 const isSameColor = (c1: HsvaColor, c2: HsvaColor) =>
@@ -26,8 +26,7 @@ export const ColorPicker = ({ color, changeColor }: {
                     Math.abs(c1.v - c2.v) < 0.1 &&
                     Math.abs(c1.a - c2.a) < 0.01;
 
-                if (!isSameColor) {
-                    console.log(newColor, color);
+                if (!isSameColor(color, newColor)) {
                     changeColor(newColor);
                 }
 
@@ -51,7 +50,7 @@ export const ColorPicker = ({ color, changeColor }: {
                 <input
                     className="text-center shadow-lg px-4 py-2 w-38 text-2xl rounded-2xl font-medium focus:outline-none transition"
                     type="text"
-                    value={inputValue}
+                    value={inputValue.toUpperCase()}
                     onChange={(e) => {
                         setInputValue(e.target.value);
                     }}

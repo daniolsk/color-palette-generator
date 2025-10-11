@@ -1,75 +1,77 @@
 import Color from "color";
 
-// --- Pomocnicza funkcja do lekkiej modyfikacji kolorów ---
-const slightlyModify = (hex: string, strength: number = 8): string => {
+const randomlyModifyColor = (
+    hex: string,
+    saturationStrength: number = 5,
+    lightnessStrength: number = 5,
+    randomDirection: boolean = false,
+    hueStrength: number = 0
+): string => {
     const c = Color(hex).hsl().object();
 
-    const randomDelta = () => {
-        const sign = Math.random() < 0.5 ? -1 : 1;
-        const value = Math.random() * strength; // ±strength
-        return sign * value;
+    const randomDelta = (strength: number) => {
+        const min = strength * 0.40;
+        const max = strength * 0.60;
+        const delta = min + Math.random() * (
+            max - min
+        );
+        const direction = randomDirection ? (
+            Math.random() > 0.5 ? -1 : 1
+        ) : 1;
+        console.log(delta, direction);
+        return delta * direction;
     };
 
-    const clamp = (v: number) => Math.max(0, Math.min(100, v));
+    const clamp = (v: number, min: number = 0, max: number = 100) => Math.max(min, Math.min(max, v));
 
     return Color({
-        h: c.h,
-        s: clamp(c.s + randomDelta()),
-        l: clamp(c.l + randomDelta())
+        h: (
+            clamp(c.h + randomDelta(hueStrength), 0, 360)
+        ),
+        s: (
+            clamp(c.s + randomDelta(saturationStrength))
+        ),
+        l: (
+            clamp(c.l + randomDelta(lightnessStrength), 60, 90)
+        )
     }).hex();
 };
 
-// --- Generatory palet (3 kolory: dominujący, dodatkowy, akcent) ---
+// --- Generatory palet ---
 
 export const getComplementary = (colorInput: string): string[] => {
     const base = Color(colorInput);
     const complementary = base.rotate(180);
 
-    // kolor pośredni między bazowym a dopełniającym
-    const baseHSL = base.hsl().object();
-    const compHSL = complementary.hsl().object();
-    const mid = Color({
-        h: (
-            baseHSL.h + compHSL.h
-        ) / 2,
-        s: (
-            baseHSL.s + compHSL.s
-        ) / 2,
-        l: (
-            baseHSL.l + compHSL.l
-        ) / 2
-    });
-
-    // 60 / 30 / 10 – dominujący / dodatkowy / akcent
     return [
-        base.hex(),                   // dominujący
-        slightlyModify(mid.hex(), 6), // dodatkowy
-        slightlyModify(complementary.hex(), 10) // akcent
+        base.hex(),
+        randomlyModifyColor(complementary.hex(), 15, 60),
+        randomlyModifyColor(complementary.hex(), 55, 15)
     ];
 };
 
 export const getTriad = (colorInput: string): string[] => {
     const base = Color(colorInput).hsl();
-    const step = 120; // triada = 120° odstępu
+    const step = 120;
     const second = base.rotate(step);
     const third = base.rotate(2 * step);
 
     return [
         base.hex(),
-        slightlyModify(second.hex(), 6),
-        slightlyModify(third.hex(), 10)
+        randomlyModifyColor(second.hex(), 15, 60),
+        randomlyModifyColor(third.hex(), 55, 15)
     ];
 };
 
-export const getAnalogous = (colorInput: string, range: number = 30): string[] => {
+export const getAnalogous = (colorInput: string, range: number = 45): string[] => {
     const base = Color(colorInput).hsl();
     const left = base.rotate(-range);
     const right = base.rotate(range);
 
     return [
         base.hex(),
-        slightlyModify(left.hex(), 6),
-        slightlyModify(right.hex(), 8)
+        randomlyModifyColor(left.hex(), 15, 60),
+        randomlyModifyColor(right.hex(), 55, 15)
     ];
 };
 
@@ -80,29 +82,17 @@ export const getSplitComplementary = (colorInput: string): string[] => {
 
     return [
         base.hex(),
-        slightlyModify(left.hex(), 6),
-        slightlyModify(right.hex(), 10)
+        randomlyModifyColor(left.hex(), 15, 60),
+        randomlyModifyColor(right.hex(), 55, 15)
     ];
 };
 
 export const getMonochromatic = (colorInput: string): string[] => {
     const base = Color(colorInput).hsl().object();
 
-    const lighter = Color({
-        h: base.h,
-        s: base.s,
-        l: Math.min(100, base.l + 20)
-    });
-
-    const darker = Color({
-        h: base.h,
-        s: base.s,
-        l: Math.max(0, base.l - 20)
-    });
-
     return [
         Color(base).hex(),
-        slightlyModify(lighter.hex(), 5),
-        slightlyModify(darker.hex(), 8)
+        randomlyModifyColor(Color(base).hex(), 15, 60),
+        randomlyModifyColor(Color(base).hex(), 55, 15)
     ];
 };

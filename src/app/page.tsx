@@ -25,9 +25,9 @@ import { StickersVisualization } from "@/components/StickersVisualization";
 
 const Home = () => {
     const [color, setColor] = useState<HsvaColor>({
-        h: 143,
-        s: 100,
-        v: 100,
+        h: 343,
+        s: 63,
+        v: 80,
         a: 1
     });
     const [backgroundColor, setBackgroundColor] = useState<HsvaColor>({
