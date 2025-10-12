@@ -180,11 +180,15 @@ const Home = () => {
                     }
                 />
             </div>
-            <div className="justify-center flex text-lg gap-4 items-center">
+            <div className="justify-center flex text-lg gap-4 items-center cursor-pointer"
+                 onClick={() => document.getElementById("landingPageVisualization")!.scrollIntoView({
+                     behavior: "smooth", block: "center"
+                 })}>
                 <span>Przesuń niżej aby zobaczyć wizualizacje</span>
                 <ArrowDown className="animate-bounce" />
             </div>
-            <div className="max-w-[1280px] px-4 mx-auto w-full mb-8 mt-32 flex flex-col gap-2">
+            <div className="max-w-[1280px] px-4 mx-auto w-full mb-8 mt-32 flex flex-col gap-2"
+                 id="landingPageVisualization">
                 <div className="tracking-tighter text-gray-600">
                     <span className="font-bold mr-1">#1</span>
                     Strona początkowa
