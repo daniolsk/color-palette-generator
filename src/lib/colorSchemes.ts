@@ -18,7 +18,6 @@ const randomlyModifyColor = (
         const direction = randomDirection ? (
             Math.random() > 0.5 ? -1 : 1
         ) : 1;
-        console.log(delta, direction);
         return delta * direction;
     };
 
