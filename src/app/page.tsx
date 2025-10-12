@@ -105,6 +105,7 @@ const Home = () => {
                     zIndex: "999999",
                     maxWidth: "320px"
                 }}
+                opacity={1}
             >
                 Kolory w przestrzeni barw CMYK mogą odbiegać od ich odpowiedników w innych formatach.
             </Tooltip>

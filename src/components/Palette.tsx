@@ -11,10 +11,12 @@ import {
 	rgbaToRgb,
 	rgbToCmyk,
 } from '@/lib/colors';
-import { Copy, Dice5, RefreshCcw } from "lucide-react";
+import { CircleCheck, CircleMinus, CircleX, Copy, Dice5, RefreshCcw } from "lucide-react";
 import { useState } from 'react';
 import Color from 'color';
 import toast from 'react-hot-toast';
+import { score as getContrastScore, hex as checkContrast } from "wcag-contrast";
+import { Tooltip } from "react-tooltip";
 
 export const Palette = ({
 	color,
@@ -69,11 +71,11 @@ export const Palette = ({
 	const renderColorLabel = (i: number) => {
 		switch (i) {
 			case 0:
-                return "Kolor dominujący (60%)";
+                return "Kolor dominujący";
 			case 1:
-                return "Kolor uzupełniający (30%)";
+                return "Kolor uzupełniający";
 			case 2:
-                return "Kolor akcentujący (10%)";
+                return "Kolor akcentujący";
 			case 3:
 				return 'Kolor tła';
 			case 4:
@@ -81,8 +83,45 @@ export const Palette = ({
 		}
 	};
 
+    const renderContrastIndicator = (firstColor: string, secondColor: string) => {
+        switch (getContrastScore(checkContrast(firstColor, secondColor))) {
+            case "AAA":
+                return <CircleCheck size="18" />;
+            case "AA":
+                return <CircleCheck size="18" />;
+            case "AA Large":
+                return <CircleMinus size="18" />;
+            case "Fail":
+                return <CircleX size="18" />;
+        }
+    };
+
 	return (
 		<div className='gap-8 py-8 flex flex-col items-center justify-center'>
+            <Tooltip
+                id="contrast-info"
+                place="top"
+                style={{
+                    borderRadius: "16px",
+                    zIndex: "999999",
+                    maxWidth: "320px"
+                }}
+                opacity={1}
+                render={({ activeAnchor }) => (
+                    <span>
+                        {getContrastScore(checkContrast(
+                            activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
+                            activeAnchor?.getAttribute("data-tooltip-second-color") ?? ""
+                        ))}
+                        {" - "}
+                        {checkContrast(
+                            activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
+                            activeAnchor?.getAttribute("data-tooltip-second-color") ?? ""
+                        ).toFixed(2)}
+                        :1
+                    </span>
+                )}
+            />
 			<div className='flex gap-2 lg:gap-4 text-lg items-center flex-col lg:flex-row'>
 				<h2 className='text-lg'>Harmonia kolorów:</h2>
 				<select
@@ -128,7 +167,7 @@ export const Palette = ({
                         </div>
 					</div>
 					<div
-						className={`grid grid-cols-1 desktop:grid-cols-6 auto-rows-fr gap-4 p-6 w-full h-full transition-all`}
+                        className={`grid grid-cols-1 desktop:grid-cols-10 auto-rows-fr gap-4 p-6 w-full h-full transition-all`}
 					>
 						{palette.map((col, i) => {
 							const textColor =
@@ -143,14 +182,23 @@ export const Palette = ({
 							return (
 								<div
 									key={i}
-									className={`${i === 0 ? 'desktop:col-span-6' : ''} ${
-										i === 1 ? 'desktop:col-span-4' : ''
+                                    className={`${i === 0 ? "desktop:col-span-10" : ""} ${
+                                        i === 1 ? "desktop:col-span-6" : ""
 									} ${
-										i === 3 || i === 4 ? 'desktop:col-span-3' : ''
-									} desktop:col-span-2`}
+                                        i === 3 || i === 4 ? "desktop:col-span-5" : ""
+                                    } desktop:col-span-4`}
 								>
-									<div className='text-sm text-gray-600 mb-0.5'>
-										{renderColorLabel(i)}
+                                    <div className="justify-between flex text-sm text-gray-600 mb-0.5">
+                                        <div>{renderColorLabel(i)}</div>
+                                        <div className="text-sm text-gray-600 cursor-help"
+                                             data-tooltip-id="contrast-info"
+                                             data-tooltip-first-color={palette[i]}
+                                             data-tooltip-second-color={palette[3]}>
+                                            {
+                                                i < 3 ?
+                                                    renderContrastIndicator(palette[i], palette[3]) : null
+                                            }
+                                        </div>
 									</div>
 									<div
 										style={{ backgroundColor: col, color: textColor }}

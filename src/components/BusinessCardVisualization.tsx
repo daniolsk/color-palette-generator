@@ -29,7 +29,7 @@ export const BusinessCardVisualization = ({ palette }: { palette: HexColor[] }) 
                      viewBox="0 0 743 1024"
                      fill="none"
                      xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_61_390)">
+                    <g clipPath="url(#clip0_61_390)">
                         <rect width="743" height="1024" transform="translate(743 1024) rotate(-180)"
                               fill={palette[2]} />
                         <path
@@ -70,7 +70,7 @@ export const BusinessCardVisualization = ({ palette }: { palette: HexColor[] }) 
                 <svg className="w-full h-full rounded-2xl shadow-lg/20" width="1486" height="1024"
                      viewBox="0 0 1486 1024"
                      fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_61_149)">
+                    <g clipPath="url(#clip0_61_149)">
                         <rect width="1486" height="1024" fill={palette[2]} />
                         <path d="M1486 1024H629.145C420.775 930.225 254.883 798.386 168.5 709L660.919 0H1486V1024Z"
                               fill={palette[0]} />
