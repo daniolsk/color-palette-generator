@@ -86,13 +86,13 @@ export const Palette = ({
     const renderContrastIndicator = (firstColor: string, secondColor: string) => {
         switch (getContrastScore(checkContrast(firstColor, secondColor))) {
             case "AAA":
-                return <CircleCheck size="18" />;
+                return <CircleCheck color="green" size="18" />;
             case "AA":
-                return <CircleCheck size="18" />;
+                return <CircleCheck color="green" size="18" />;
             case "AA Large":
-                return <CircleMinus size="18" />;
+                return <CircleMinus color="black" size="18" />;
             case "Fail":
-                return <CircleX size="18" />;
+                return <CircleX color="red" size="18" />;
         }
     };
 
@@ -109,16 +109,17 @@ export const Palette = ({
                 opacity={1}
                 render={({ activeAnchor }) => (
                     <span>
-                        {getContrastScore(checkContrast(
-                            activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
-                            activeAnchor?.getAttribute("data-tooltip-second-color") ?? ""
-                        ))}
-                        {" - "}
+                        Kontrast:{" "}
                         {checkContrast(
                             activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
                             activeAnchor?.getAttribute("data-tooltip-second-color") ?? ""
                         ).toFixed(2)}
                         :1
+                        {" - "}
+                        {getContrastScore(checkContrast(
+                            activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
+                            activeAnchor?.getAttribute("data-tooltip-second-color") ?? ""
+                        ))}
                     </span>
                 )}
             />
@@ -188,9 +189,9 @@ export const Palette = ({
                                         i === 3 || i === 4 ? "desktop:col-span-5" : ""
                                     } desktop:col-span-4`}
 								>
-                                    <div className="justify-between flex text-sm text-gray-600 mb-0.5">
-                                        <div>{renderColorLabel(i)}</div>
-                                        <div className="text-sm text-gray-600 cursor-help"
+                                    <div className="justify-between flex text-sm mb-0.5">
+                                        <div className="text-gray-600">{renderColorLabel(i)}</div>
+                                        <div className="text-sm cursor-help"
                                              data-tooltip-id="contrast-info"
                                              data-tooltip-first-color={palette[i]}
                                              data-tooltip-second-color={palette[3]}>
