@@ -11,7 +11,7 @@ import {
 	rgbaToRgb,
 	rgbToCmyk,
 } from '@/lib/colors';
-import { CircleCheck, CircleMinus, CircleX, Copy, Dice5, RefreshCcw } from "lucide-react";
+import {CircleCheck, CircleMinus, CircleX, Contrast, Copy, Dice5, RefreshCcw} from "lucide-react";
 import { useState } from 'react';
 import Color from 'color';
 import toast from 'react-hot-toast';
@@ -86,13 +86,13 @@ export const Palette = ({
     const renderContrastIndicator = (firstColor: string, secondColor: string) => {
         switch (getContrastScore(checkContrast(firstColor, secondColor))) {
             case "AAA":
-                return <CircleCheck color="green" size="18" />;
+                return <Contrast color="green" size="18" />;
             case "AA":
-                return <CircleCheck color="green" size="18" />;
+                return <Contrast color="green" size="18" />;
             case "AA Large":
-                return <CircleMinus color="black" size="18" />;
+                return <Contrast color="black" size="18" />;
             case "Fail":
-                return <CircleX color="red" size="18" />;
+                return <Contrast color="red" size="18" />;
         }
     };
 
@@ -191,7 +191,7 @@ export const Palette = ({
 								>
                                     <div className="justify-between flex text-sm mb-0.5">
                                         <div className="text-gray-600">{renderColorLabel(i)}</div>
-                                        <div className="text-sm cursor-help"
+                                        <div className="text-sm cursor-pointer"
                                              data-tooltip-id="contrast-info"
                                              data-tooltip-first-color={palette[i]}
                                              data-tooltip-second-color={palette[3]}>

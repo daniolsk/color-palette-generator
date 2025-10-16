@@ -3,7 +3,7 @@ import { HexColor } from "@/lib/colors";
 export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
     return (
         <section className="grid grid-cols-3 grid-rows-2 items-center justify-items-center">
-            <div className="p-20 flex justify-center items-center">
+            <div className="p-8 flex justify-center items-center">
                 <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="902.41854"
                      height="826.20679"
                      viewBox="0 0 902.41854 826.20679">
@@ -127,7 +127,7 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                         transform="translate(-148.79073 -36.89661)" fill={palette[0]} />
                 </svg>
             </div>
-            <div className="p-12 flex justify-center items-center">
+            <div className="p-8 flex justify-center items-center">
                 <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="880"
                      height="813.325"
                      viewBox="0 0 880 813.325">
@@ -286,7 +286,7 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                     </g>
                 </svg>
             </div>
-            <div className="p-12 flex justify-center items-center">
+            <div className="p-8 flex justify-center items-center">
                 <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="766.14608"
                      height="604.79838"
                      viewBox="0 0 766.14608 604.79838" role="img">
@@ -380,7 +380,7 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                     <circle cx="594.14608" cy="532.79838" r="34" fill={palette[2]} />
                 </svg>
             </div>
-            <div className="p-12 flex justify-center items-center">
+            <div className="p-8 flex justify-center items-center">
                 <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="692.60517"
                      height="748.73305"
                      viewBox="0 0 692.60517 748.73305">
@@ -453,7 +453,7 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                         transform="translate(-253.69742 -75.63348)" fill={palette[0]} />
                 </svg>
             </div>
-            <div className="p-12 flex justify-center items-center">
+            <div className="p-8 flex justify-center items-center">
                 <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="713"
                      height="847.85985"
                      viewBox="0 0 713 847.85985"><title>cabin</title>
@@ -580,7 +580,7 @@ export const StickersVisualization = ({ palette }: { palette: HexColor[] }) => {
                         fill={palette[0]} />
                 </svg>
             </div>
-            <div className="p-12 flex justify-center items-center">
+            <div className="p-8 flex justify-center items-center">
                 <svg className="w-full h-full drop-shadow-lg" xmlns="http://www.w3.org/2000/svg" width="1106"
                      height="783.42853"
                      viewBox="0 0 1106 783.42853"><title>happy women day</title>

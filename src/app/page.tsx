@@ -23,6 +23,7 @@ import {
 import { BusinessCardVisualization } from "@/components/BusinessCardVisualization";
 import { StickersVisualization } from "@/components/StickersVisualization";
 import { Tooltip } from "react-tooltip";
+import Color from "color";
 
 const Home = () => {
     const [color, setColor] = useState<HsvaColor>({
@@ -194,16 +195,129 @@ const Home = () => {
                     <span className="font-bold mr-1">#1</span>
                     Strona początkowa
                 </div>
-                <div className="bg-white p-4 rounded-2xl">
-                    <LandingPageVisualization palette={palette} />
+                <div className="flex gap-4">
+                    <div className="bg-white p-4 rounded-2xl">
+                        <LandingPageVisualization palette={palette} />
+                    </div>
+                </div>
+                <div className="tracking-tighter mt-4 text-gray-600">Użyte kolory:</div>
+                <div className="bg-white p-6 rounded-2xl flex flex-col gap-2">
+                    <div className="flex gap-6 justify-between">
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div>Kolor główny</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[0], color: Color(palette[0]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[0] }
+                                </div>
+                            </div>
+                            <ul className="list-disc pl-5 text-sm">
+                                <li>Tekst główny</li>
+                                <li>Przycisk akcji</li>
+                                <li>Elementy grafiki</li>
+                            </ul>
+                        </div>
+                       <div className="flex flex-col gap-4">
+                           <div className="flex flex-col gap-2">
+                               <div className="text-sm">Kolor uzupełniający</div>
+                               <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[1], color: Color(palette[1]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                   { palette[1] }
+                               </div>
+                           </div>
+                           <ul className="list-disc pl-5 text-sm">
+                               <li>Przycisk dodatkowy</li>
+                               <li>Elementy grafiki</li>
+                           </ul>
+                       </div>
+                       <div className="flex flex-col gap-4">
+                           <div className="flex flex-col gap-2">
+                               <div className="text-sm">Kolor akcentujący</div>
+                               <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[2], color: Color(palette[2]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                   { palette[2] }
+                               </div>
+                           </div>
+                           <ul className="list-disc pl-5 text-sm">
+                               <li>Elementy logo</li>
+                               <li>Drobne elementy grafiki</li>
+                           </ul>
+                       </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor tła</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[3], color: Color(palette[3]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[3] }
+                                </div>
+                            </div>
+                            <ul className="list-disc pl-5 text-sm">
+                                <li>Elementy logo</li>
+                                <li>Drobne elementy grafiki</li>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor tekstu</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[4], color: Color(palette[4]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[4] }
+                                </div>
+                            </div>
+                            <ul className="list-disc pl-5 text-sm">
+                                <li>Elementy logo</li>
+                                <li>Drobne elementy grafiki</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="max-w-[1280px] px-4 mx-auto w-full mb-8 mt-16 flex flex-col gap-2">
                 <div className="tracking-tighter text-gray-600">
                     <span className="font-bold mr-1">#2</span> Wizytówka
                 </div>
-                <div className="bg-white p-4 rounded-2xl z-0 pb-68 pt-8">
+                <div className="bg-white p-4 rounded-2xl z-0 pb-48 pt-8">
                     <BusinessCardVisualization palette={palette} />
+                </div>
+                <div className="tracking-tighter mt-4 text-gray-600">Użyte kolory:</div>
+                <div className="bg-white p-6 rounded-2xl flex flex-col gap-2">
+                    <div className="flex gap-6 justify-between">
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div>Kolor główny</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[0], color: Color(palette[0]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[0] }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor uzupełniający</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[1], color: Color(palette[1]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[1] }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor akcentujący</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[2], color: Color(palette[2]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[2] }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor tła</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[3], color: Color(palette[3]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[3] }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor tekstu</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[4], color: Color(palette[4]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[4] }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="max-w-[1280px] px-4 mx-auto w-full mb-8 mt-16 flex flex-col gap-2">
@@ -212,6 +326,51 @@ const Home = () => {
                 </div>
                 <div className="bg-white p-4 rounded-2xl">
                     <StickersVisualization palette={palette} />
+                </div>
+                <div className="tracking-tighter mt-4 text-gray-600">Użyte kolory:</div>
+                <div className="bg-white p-6 rounded-2xl flex flex-col gap-2">
+                    <div className="flex gap-6 justify-between">
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div>Kolor główny</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[0], color: Color(palette[0]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[0] }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor uzupełniający</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[1], color: Color(palette[1]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[1] }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor akcentujący</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[2], color: Color(palette[2]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[2] }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor tła</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[3], color: Color(palette[3]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[3] }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm">Kolor tekstu</div>
+                                <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[4], color: Color(palette[4]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
+                                    { palette[4] }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="p-4 text-center">Made with ❤️ by Daniel Skowron</div>

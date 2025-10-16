@@ -3,7 +3,7 @@ import { HexColor } from "@/lib/colors";
 export const BusinessCardVisualization = ({ palette }: { palette: HexColor[] }) => {
     return (
         <section className="flex flex-col relative">
-            <div className="grid grid-cols-2 p-4 mr-24 ml-96 z-20">
+            <div className="grid grid-cols-2 p-4 mr-32 ml-96 z-20">
                 <div className="rounded-l-2xl shadow-lg/20 bg-white">
                     <main className="flex flex-col justify-center px-8 py-16 h-full">
                         <div className="text-5xl flex-1 font-extrabold tracking-tighter">
@@ -66,7 +66,7 @@ export const BusinessCardVisualization = ({ palette }: { palette: HexColor[] }) 
                     </defs>
                 </svg>
             </div>
-            <div className="p-4 mr-96 ml-24 absolute top-60 left-0 z-10">
+            <div className="p-4 mr-96 ml-32 absolute top-40 left-0 z-10">
                 <svg className="w-full h-full rounded-2xl shadow-lg/20" width="1486" height="1024"
                      viewBox="0 0 1486 1024"
                      fill="none" xmlns="http://www.w3.org/2000/svg">
