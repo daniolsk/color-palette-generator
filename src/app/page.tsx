@@ -27,9 +27,9 @@ import Color from "color";
 
 const Home = () => {
     const [color, setColor] = useState<HsvaColor>({
-        h: 343,
-        s: 63,
-        v: 80,
+        h: 313,
+        s: 73,
+        v: 61,
         a: 1
     });
     const [backgroundColor, setBackgroundColor] = useState<HsvaColor>({
