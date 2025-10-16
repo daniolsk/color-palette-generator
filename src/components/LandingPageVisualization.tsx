@@ -3,7 +3,7 @@ import { ChartLine } from "lucide-react";
 
 export const LandingPageVisualization = ({ palette }: { palette: HexColor[] }) => {
     return (
-        <section>
+        <section style={{ color: palette[4] }}>
             <header className="p-4 flex justify-between">
                 <div className="px-2 gap-2 flex items-center cursor-pointer">
                     <div>
@@ -35,7 +35,7 @@ export const LandingPageVisualization = ({ palette }: { palette: HexColor[] }) =
                         <span className="text-red-900" style={{
                             color: palette[0],
                         }}
-                    >
+                        >
                         Cras euismod dua et vehicula.
                     </span>
                     </div>

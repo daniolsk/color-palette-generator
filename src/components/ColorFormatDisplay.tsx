@@ -1,7 +1,6 @@
 import {
-    hsvaToHex, HsvaColor, hsvaToRgba, rgbaToHexa, HslaColor, CmykColor, RgbaColor
+    HsvaColor, hsvaToRgba, rgbaToHexa, HslaColor, CmykColor, RgbaColor
 } from "@/lib/colors";
-import { Tooltip } from "react-tooltip";
 import { Copy, TriangleAlert } from "lucide-react";
 import toast from "react-hot-toast";
 

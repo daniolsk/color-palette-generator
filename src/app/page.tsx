@@ -196,7 +196,7 @@ const Home = () => {
                     Strona początkowa
                 </div>
                 <div className="flex gap-4">
-                    <div className="bg-white p-4 rounded-2xl">
+                    <div className="p-4 shadow-lg rounded-2xl" style={{backgroundColor: palette[3]}}>
                         <LandingPageVisualization palette={palette} />
                     </div>
                 </div>

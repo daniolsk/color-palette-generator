@@ -11,7 +11,7 @@ import {
 	rgbaToRgb,
 	rgbToCmyk,
 } from '@/lib/colors';
-import {CircleCheck, CircleMinus, CircleX, Contrast, Copy, Dice5, RefreshCcw} from "lucide-react";
+import {Contrast, Copy, Dice5, RefreshCcw} from "lucide-react";
 import { useState } from 'react';
 import Color from 'color';
 import toast from 'react-hot-toast';
@@ -23,7 +23,7 @@ export const Palette = ({
 	palette,
 	setHarmony,
 	refreshPalette,
-    setRandomColor
+    setRandomColor,
 }: {
 	color: HsvaColor;
 	palette: HexColor[];
@@ -168,7 +168,7 @@ export const Palette = ({
                         </div>
 					</div>
 					<div
-                        className={`grid grid-cols-1 desktop:grid-cols-10 auto-rows-fr gap-4 p-6 w-full h-full transition-all`}
+                        className={`grid grid-cols-1 desktop:grid-cols-10 gap-4 p-6 w-full h-full transition-all`}
 					>
 						{palette.map((col, i) => {
 							const textColor =
