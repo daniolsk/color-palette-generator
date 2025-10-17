@@ -205,7 +205,7 @@ const Home = () => {
                     <div className="flex gap-6 justify-between">
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-2">
-                                <div>Kolor główny</div>
+                                <div className="text-sm">Kolor główny</div>
                                 <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[0], color: Color(palette[0]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
                                     { palette[0] }
                                 </div>
@@ -248,8 +248,7 @@ const Home = () => {
                                 </div>
                             </div>
                             <ul className="list-disc pl-5 text-sm">
-                                <li>Elementy logo</li>
-                                <li>Drobne elementy grafiki</li>
+                                <li>Tło całej strony</li>
                             </ul>
                         </div>
                         <div className="flex flex-col gap-4">
@@ -260,8 +259,7 @@ const Home = () => {
                                 </div>
                             </div>
                             <ul className="list-disc pl-5 text-sm">
-                                <li>Elementy logo</li>
-                                <li>Drobne elementy grafiki</li>
+                                <li>Pozostały zwykły tekst</li>
                             </ul>
                         </div>
                     </div>
@@ -279,7 +277,7 @@ const Home = () => {
                     <div className="flex gap-6 justify-between">
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-2">
-                                <div>Kolor główny</div>
+                                <div className="text-sm">Kolor główny</div>
                                 <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[0], color: Color(palette[0]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
                                     { palette[0] }
                                 </div>
@@ -332,7 +330,7 @@ const Home = () => {
                     <div className="flex gap-6 justify-between">
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-2">
-                                <div>Kolor główny</div>
+                                <div className="text-sm">Kolor główny</div>
                                 <div className={`shadow-lg h-24 aspect-video px-4 py-2 rounded-2xl w-full flex justify-center items-center`} style={{backgroundColor: palette[0], color: Color(palette[0]).isLight() ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)'}}>
                                     { palette[0] }
                                 </div>
