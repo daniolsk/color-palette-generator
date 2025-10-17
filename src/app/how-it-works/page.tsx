@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft } from 'lucide-react';
-import { hsvaToRgba, rgbaToHexa } from "@/lib/colors";
 
 const HowItWorksPage = () => {
     return (
@@ -151,10 +149,10 @@ const HowItWorksPage = () => {
                             </ul>
                         </li>
                         <li>
-                            <strong>HSV (Hue, Saturation, Value):</strong> Model zbliżony do HSL, powszechnie stosowany w narzędziach typu "color picker" (jak w tym generatorze).
+                            <strong>HSV (Hue, Saturation, Value):</strong> Model zbliżony do HSL, powszechnie stosowany w narzędziach typu &quot;color picker&quot; (jak w tym generatorze).
                             <ul>
                                 <li><strong>H i S:</strong> Analogicznie do HSL.</li>
-                                <li><strong>V (Wartość):</strong> Definiuje "czystość" koloru (0% = czarny, 100% = kolor o pełnym nasyceniu i jasności).</li>
+                                <li><strong>V (Wartość):</strong> Definiuje &quot;czystość&quot; koloru (0% = czarny, 100% = kolor o pełnym nasyceniu i jasności).</li>
                             </ul>
                         </li>
                         <li>
