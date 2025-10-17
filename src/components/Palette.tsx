@@ -71,7 +71,7 @@ export const Palette = ({
 	const renderColorLabel = (i: number) => {
 		switch (i) {
 			case 0:
-                return "Kolor dominujący";
+                return "Kolor główny";
 			case 1:
                 return "Kolor uzupełniający";
 			case 2:

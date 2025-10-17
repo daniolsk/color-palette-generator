@@ -24,6 +24,7 @@ import { BusinessCardVisualization } from "@/components/BusinessCardVisualizatio
 import { StickersVisualization } from "@/components/StickersVisualization";
 import { Tooltip } from "react-tooltip";
 import Color from "color";
+import Link from "next/link";
 
 const Home = () => {
     const [color, setColor] = useState<HsvaColor>({
@@ -145,7 +146,7 @@ const Home = () => {
                 </div>
             </div>
             <div
-                className="p-4 desktop:p-6 shadow-lg"
+                className="p-3 desktop:p-4 shadow-lg"
                 style={{
                     backgroundColor: rgbaToHexa(
                         hsvaToRgba({
@@ -157,12 +158,12 @@ const Home = () => {
                 }}
             >
                 <div className="max-w-[1280px] mx-auto flex justify-between items-center">
-                    <div className="text-xl desktop:text-2xl font-medium tracking-tighter">
+                    <Link href="/" className="text-xl desktop:text-2xl font-medium tracking-tighter">
                         Generator palet barw
-                    </div>
-                    <div className="text-lg desktop:text-xl py-2 px-3 cursor-pointer">
+                    </Link>
+                    <Link href="/how-it-works" className="text-lg desktop:text-xl py-2 px-3 cursor-pointer hover:underline">
                         Jak to działa?
-                    </div>
+                    </Link>
                 </div>
             </div>
             <div
