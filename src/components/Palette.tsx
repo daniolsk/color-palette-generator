@@ -99,13 +99,13 @@ export const Palette = ({
     const displayContrastScore = (firstColor: string, secondColor: string) => {
         switch (getContrastScore(checkContrast(firstColor, secondColor))) {
             case "AAA":
-                return <span>- poziom według WCAG: <b>AAA</b> (najwyższy)</span>;
+                return <span>- poziom według WCAG: <b>AAA (najwyższy)</b></span>;
             case "AA":
-                return <span>- poziom według WCAG: <b>AA</b> (standardowy)</span>;
+                return <span>- poziom według WCAG: <b>AA(standardowy)</b> </span>;
             case "AA Large":
-                return <span>- poziom według WCAG: <b>AA</b> (standardowy)</span>;
+                return <span>- poziom według WCAG: <b>AA (standardowy)</b></span>;
             case "Fail":
-                return <span></span>
+                return <span>- poziom według WCAG: <b>niewystarczający</b></span>;
         }
     };
 
