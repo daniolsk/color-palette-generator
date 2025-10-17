@@ -96,6 +96,19 @@ export const Palette = ({
         }
     };
 
+    const displayContrastScore = (firstColor: string, secondColor: string) => {
+        switch (getContrastScore(checkContrast(firstColor, secondColor))) {
+            case "AAA":
+                return <span>- poziom według WCAG: <b>AAA</b> (najwyższy)</span>;
+            case "AA":
+                return <span>- poziom według WCAG: <b>AA</b> (standardowy)</span>;
+            case "AA Large":
+                return <span>- poziom według WCAG: <b>AA</b> (standardowy)</span>;
+            case "Fail":
+                return <span></span>
+        }
+    };
+
 	return (
 		<div className='gap-8 py-8 flex flex-col items-center justify-center'>
             <Tooltip
@@ -104,22 +117,23 @@ export const Palette = ({
                 style={{
                     borderRadius: "16px",
                     zIndex: "999999",
-                    maxWidth: "320px"
+                    maxWidth: "280px"
                 }}
                 opacity={1}
                 render={({ activeAnchor }) => (
                     <span>
                         Kontrast:{" "}
-                        {checkContrast(
+                       <span className="font-bold">
+                           {checkContrast(
+                                activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
+                                activeAnchor?.getAttribute("data-tooltip-second-color") ?? ""
+                                ).toFixed(2)}
+                        :1{" "}
+                       </span>
+                        {displayContrastScore(
                             activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
                             activeAnchor?.getAttribute("data-tooltip-second-color") ?? ""
-                        ).toFixed(2)}
-                        :1
-                        {" - "}
-                        {getContrastScore(checkContrast(
-                            activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
-                            activeAnchor?.getAttribute("data-tooltip-second-color") ?? ""
-                        ))}
+                        )}
                     </span>
                 )}
             />
