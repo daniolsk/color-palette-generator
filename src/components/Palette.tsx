@@ -122,7 +122,7 @@ export const Palette = ({
                 opacity={1}
                 render={({ activeAnchor }) => (
                     <span>
-                        Kontrast:{" "}
+                        Kontrast do tła:{" "}
                        <span className="font-bold">
                            {checkContrast(
                                 activeAnchor?.getAttribute("data-tooltip-first-color") ?? "",
