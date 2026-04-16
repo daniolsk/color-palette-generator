@@ -28,27 +28,79 @@ import { Tooltip } from 'react-tooltip';
 import Color from 'color';
 import Link from 'next/link';
 
+const INITIAL_COLOR: HsvaColor = {
+	h: 313,
+	s: 73,
+	v: 61,
+	a: 1,
+};
+
+const INITIAL_BACKGROUND_COLOR: HsvaColor = {
+	h: 0,
+	s: 0,
+	v: 100,
+	a: 1,
+};
+
+const INITIAL_TEXT_COLOR: HsvaColor = {
+	h: 0,
+	s: 0,
+	v: 0,
+	a: 1,
+};
+
+const DEFAULT_HARMONY = 'analogous';
+
+const getPaletteByHarmony = (
+	colorHex: string,
+	harmony: string,
+	backgroundColor: HsvaColor,
+	textColor: HsvaColor
+) => {
+	let newPalette: string[];
+
+	switch (harmony) {
+		case 'monochromatic':
+			newPalette = getMonochromatic(colorHex);
+			break;
+		case 'analogous':
+			newPalette = getAnalogous(colorHex);
+			break;
+		case 'complementary':
+			newPalette = getComplementary(colorHex);
+			break;
+		case 'split-complementary':
+			newPalette = getSplitComplementary(colorHex);
+			break;
+		case 'triadic':
+			newPalette = getTriad(colorHex);
+			break;
+		default:
+			newPalette = getMonochromatic(colorHex);
+	}
+
+	return [
+		...newPalette,
+		hsvaToHex(backgroundColor).toUpperCase(),
+		hsvaToHex(textColor).toUpperCase(),
+	];
+};
+
 const Home = () => {
-	const [color, setColor] = useState<HsvaColor>({
-		h: 313,
-		s: 73,
-		v: 61,
-		a: 1,
-	});
-	const [backgroundColor, setBackgroundColor] = useState<HsvaColor>({
-		h: 0,
-		s: 0,
-		v: 100,
-		a: 1,
-	});
-	const [textColor, setTextColor] = useState<HsvaColor>({
-		h: 0,
-		s: 0,
-		v: 0,
-		a: 1,
-	});
-	const [palette, setPalette] = useState<HexColor[]>([]);
-	const [harmony, setHarmony] = useState<string>('analogous');
+	const [color, setColor] = useState<HsvaColor>(INITIAL_COLOR);
+	const [backgroundColor, setBackgroundColor] = useState<HsvaColor>(
+		INITIAL_BACKGROUND_COLOR
+	);
+	const [textColor, setTextColor] = useState<HsvaColor>(INITIAL_TEXT_COLOR);
+	const [harmony, setHarmony] = useState<string>(DEFAULT_HARMONY);
+	const [palette, setPalette] = useState<HexColor[]>(() =>
+		getPaletteByHarmony(
+			hsvaToHex(INITIAL_COLOR),
+			DEFAULT_HARMONY,
+			INITIAL_BACKGROUND_COLOR,
+			INITIAL_TEXT_COLOR
+		) as HexColor[]
+	);
 	const [showRefresh, setShowRefresh] = useState(false);
 
 	useEffect(() => {
@@ -69,33 +121,7 @@ const Home = () => {
 	}, []);
 
 	const getNewPalette = (colorHex: string, harmony: string) => {
-		let newPalette: string[];
-
-		switch (harmony) {
-			case 'monochromatic':
-				newPalette = getMonochromatic(colorHex);
-				break;
-			case 'analogous':
-				newPalette = getAnalogous(colorHex);
-				break;
-			case 'complementary':
-				newPalette = getComplementary(colorHex);
-				break;
-			case 'split-complementary':
-				newPalette = getSplitComplementary(colorHex);
-				break;
-			case 'triadic':
-				newPalette = getTriad(colorHex);
-				break;
-			default:
-				newPalette = getMonochromatic(colorHex);
-		}
-
-		return [
-			...newPalette,
-			hsvaToHex(backgroundColor).toUpperCase(),
-			hsvaToHex(textColor).toUpperCase(),
-		];
+		return getPaletteByHarmony(colorHex, harmony, backgroundColor, textColor);
 	};
 
 	return (

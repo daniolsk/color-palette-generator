@@ -1,22 +1,34 @@
 import Color from "color";
 
+const getSeededUnit = (seed: string): number => {
+    let hash = 2166136261;
+
+    for (let i = 0; i < seed.length; i += 1) {
+        hash ^= seed.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+    }
+
+    return (hash >>> 0) / 4294967295;
+};
+
 const randomlyModifyColor = (
     hex: string,
     saturationStrength: number = 5,
     lightnessStrength: number = 5,
     randomDirection: boolean = false,
-    hueStrength: number = 0
+    hueStrength: number = 0,
+    seed: string = ""
 ): string => {
     const c = Color(hex).hsl().object();
 
-    const randomDelta = (strength: number) => {
+    const randomDelta = (strength: number, channelSeed: string) => {
         const min = strength * 0.40;
         const max = strength * 0.60;
-        const delta = min + Math.random() * (
+        const delta = min + getSeededUnit(`${seed}:${channelSeed}:delta`) * (
             max - min
         );
         const direction = randomDirection ? (
-            Math.random() > 0.5 ? -1 : 1
+            getSeededUnit(`${seed}:${channelSeed}:direction`) > 0.5 ? -1 : 1
         ) : 1;
         return delta * direction;
     };
@@ -25,13 +37,13 @@ const randomlyModifyColor = (
 
     return Color({
         h: (
-            clamp(c.h + randomDelta(hueStrength), 0, 360)
+            clamp(c.h + randomDelta(hueStrength, "h"), 0, 360)
         ),
         s: (
-            clamp(c.s + randomDelta(saturationStrength))
+            clamp(c.s + randomDelta(saturationStrength, "s"))
         ),
         l: (
-            clamp(c.l + randomDelta(lightnessStrength), 60, 90)
+            clamp(c.l + randomDelta(lightnessStrength, "l"), 60, 90)
         )
     }).hex();
 };
@@ -44,8 +56,8 @@ export const getComplementary = (colorInput: string): string[] => {
 
     return [
         base.hex(),
-        randomlyModifyColor(complementary.hex(), 15, 60),
-        randomlyModifyColor(complementary.hex(), 55, 15)
+        randomlyModifyColor(complementary.hex(), 15, 60, false, 0, `${base.hex()}:complementary:secondary`),
+        randomlyModifyColor(complementary.hex(), 55, 15, false, 0, `${base.hex()}:complementary:accent`)
     ];
 };
 
@@ -57,8 +69,8 @@ export const getTriad = (colorInput: string): string[] => {
 
     return [
         base.hex(),
-        randomlyModifyColor(second.hex(), 15, 60),
-        randomlyModifyColor(third.hex(), 55, 15)
+        randomlyModifyColor(second.hex(), 15, 60, false, 0, `${base.hex()}:triad:secondary`),
+        randomlyModifyColor(third.hex(), 55, 15, false, 0, `${base.hex()}:triad:accent`)
     ];
 };
 
@@ -69,8 +81,8 @@ export const getAnalogous = (colorInput: string, range: number = 45): string[] =
 
     return [
         base.hex(),
-        randomlyModifyColor(left.hex(), 15, 60),
-        randomlyModifyColor(right.hex(), 55, 15)
+        randomlyModifyColor(left.hex(), 15, 60, false, 0, `${base.hex()}:analogous:secondary`),
+        randomlyModifyColor(right.hex(), 55, 15, false, 0, `${base.hex()}:analogous:accent`)
     ];
 };
 
@@ -81,8 +93,8 @@ export const getSplitComplementary = (colorInput: string): string[] => {
 
     return [
         base.hex(),
-        randomlyModifyColor(left.hex(), 15, 60),
-        randomlyModifyColor(right.hex(), 55, 15)
+        randomlyModifyColor(left.hex(), 15, 60, false, 0, `${base.hex()}:split-complementary:secondary`),
+        randomlyModifyColor(right.hex(), 55, 15, false, 0, `${base.hex()}:split-complementary:accent`)
     ];
 };
 
@@ -91,7 +103,7 @@ export const getMonochromatic = (colorInput: string): string[] => {
 
     return [
         Color(base).hex(),
-        randomlyModifyColor(Color(base).hex(), 15, 60),
-        randomlyModifyColor(Color(base).hex(), 55, 15)
+        randomlyModifyColor(Color(base).hex(), 15, 60, false, 0, `${Color(base).hex()}:monochromatic:secondary`),
+        randomlyModifyColor(Color(base).hex(), 55, 15, false, 0, `${Color(base).hex()}:monochromatic:accent`)
     ];
 };
