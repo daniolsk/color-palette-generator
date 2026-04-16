@@ -50,18 +50,18 @@ const randomlyModifyColor = (
 
 // --- Generatory palet ---
 
-export const getComplementary = (colorInput: string): string[] => {
+export const getComplementary = (colorInput: string, variantSeed: string = ""): string[] => {
     const base = Color(colorInput);
     const complementary = base.rotate(180);
 
     return [
         base.hex(),
-        randomlyModifyColor(complementary.hex(), 15, 60, false, 0, `${base.hex()}:complementary:secondary`),
-        randomlyModifyColor(complementary.hex(), 55, 15, false, 0, `${base.hex()}:complementary:accent`)
+        randomlyModifyColor(complementary.hex(), 15, 60, false, 0, `${base.hex()}:complementary:secondary:${variantSeed}`),
+        randomlyModifyColor(complementary.hex(), 55, 15, false, 0, `${base.hex()}:complementary:accent:${variantSeed}`)
     ];
 };
 
-export const getTriad = (colorInput: string): string[] => {
+export const getTriad = (colorInput: string, variantSeed: string = ""): string[] => {
     const base = Color(colorInput).hsl();
     const step = 120;
     const second = base.rotate(step);
@@ -69,41 +69,41 @@ export const getTriad = (colorInput: string): string[] => {
 
     return [
         base.hex(),
-        randomlyModifyColor(second.hex(), 15, 60, false, 0, `${base.hex()}:triad:secondary`),
-        randomlyModifyColor(third.hex(), 55, 15, false, 0, `${base.hex()}:triad:accent`)
+        randomlyModifyColor(second.hex(), 15, 60, false, 0, `${base.hex()}:triad:secondary:${variantSeed}`),
+        randomlyModifyColor(third.hex(), 55, 15, false, 0, `${base.hex()}:triad:accent:${variantSeed}`)
     ];
 };
 
-export const getAnalogous = (colorInput: string, range: number = 45): string[] => {
+export const getAnalogous = (colorInput: string, range: number = 45, variantSeed: string = ""): string[] => {
     const base = Color(colorInput).hsl();
     const left = base.rotate(-range);
     const right = base.rotate(range);
 
     return [
         base.hex(),
-        randomlyModifyColor(left.hex(), 15, 60, false, 0, `${base.hex()}:analogous:secondary`),
-        randomlyModifyColor(right.hex(), 55, 15, false, 0, `${base.hex()}:analogous:accent`)
+        randomlyModifyColor(left.hex(), 15, 60, false, 0, `${base.hex()}:analogous:secondary:${variantSeed}`),
+        randomlyModifyColor(right.hex(), 55, 15, false, 0, `${base.hex()}:analogous:accent:${variantSeed}`)
     ];
 };
 
-export const getSplitComplementary = (colorInput: string): string[] => {
+export const getSplitComplementary = (colorInput: string, variantSeed: string = ""): string[] => {
     const base = Color(colorInput);
     const left = base.rotate(-150);
     const right = base.rotate(150);
 
     return [
         base.hex(),
-        randomlyModifyColor(left.hex(), 15, 60, false, 0, `${base.hex()}:split-complementary:secondary`),
-        randomlyModifyColor(right.hex(), 55, 15, false, 0, `${base.hex()}:split-complementary:accent`)
+        randomlyModifyColor(left.hex(), 15, 60, false, 0, `${base.hex()}:split-complementary:secondary:${variantSeed}`),
+        randomlyModifyColor(right.hex(), 55, 15, false, 0, `${base.hex()}:split-complementary:accent:${variantSeed}`)
     ];
 };
 
-export const getMonochromatic = (colorInput: string): string[] => {
+export const getMonochromatic = (colorInput: string, variantSeed: string = ""): string[] => {
     const base = Color(colorInput).hsl().object();
 
     return [
         Color(base).hex(),
-        randomlyModifyColor(Color(base).hex(), 15, 60, false, 0, `${Color(base).hex()}:monochromatic:secondary`),
-        randomlyModifyColor(Color(base).hex(), 55, 15, false, 0, `${Color(base).hex()}:monochromatic:accent`)
+        randomlyModifyColor(Color(base).hex(), 15, 60, false, 0, `${Color(base).hex()}:monochromatic:secondary:${variantSeed}`),
+        randomlyModifyColor(Color(base).hex(), 55, 15, false, 0, `${Color(base).hex()}:monochromatic:accent:${variantSeed}`)
     ];
 };

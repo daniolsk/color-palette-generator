@@ -55,28 +55,29 @@ const getPaletteByHarmony = (
 	colorHex: string,
 	harmony: string,
 	backgroundColor: HsvaColor,
-	textColor: HsvaColor
+	textColor: HsvaColor,
+	variantSeed: string = '0'
 ) => {
 	let newPalette: string[];
 
 	switch (harmony) {
 		case 'monochromatic':
-			newPalette = getMonochromatic(colorHex);
+			newPalette = getMonochromatic(colorHex, variantSeed);
 			break;
 		case 'analogous':
-			newPalette = getAnalogous(colorHex);
+			newPalette = getAnalogous(colorHex, 45, variantSeed);
 			break;
 		case 'complementary':
-			newPalette = getComplementary(colorHex);
+			newPalette = getComplementary(colorHex, variantSeed);
 			break;
 		case 'split-complementary':
-			newPalette = getSplitComplementary(colorHex);
+			newPalette = getSplitComplementary(colorHex, variantSeed);
 			break;
 		case 'triadic':
-			newPalette = getTriad(colorHex);
+			newPalette = getTriad(colorHex, variantSeed);
 			break;
 		default:
-			newPalette = getMonochromatic(colorHex);
+			newPalette = getMonochromatic(colorHex, variantSeed);
 	}
 
 	return [
@@ -93,12 +94,14 @@ const Home = () => {
 	);
 	const [textColor, setTextColor] = useState<HsvaColor>(INITIAL_TEXT_COLOR);
 	const [harmony, setHarmony] = useState<string>(DEFAULT_HARMONY);
+	const [refreshSeed, setRefreshSeed] = useState(0);
 	const [palette, setPalette] = useState<HexColor[]>(() =>
 		getPaletteByHarmony(
 			hsvaToHex(INITIAL_COLOR),
 			DEFAULT_HARMONY,
 			INITIAL_BACKGROUND_COLOR,
-			INITIAL_TEXT_COLOR
+			INITIAL_TEXT_COLOR,
+			'0'
 		) as HexColor[]
 	);
 	const [showRefresh, setShowRefresh] = useState(false);
@@ -106,7 +109,8 @@ const Home = () => {
 	useEffect(() => {
 		const colorHex = hsvaToHex(color);
 
-		setPalette(getNewPalette(colorHex, harmony) as HexColor[]);
+		setPalette(getNewPalette(colorHex, harmony, 0) as HexColor[]);
+		setRefreshSeed(0);
 	}, [color, harmony]);
 
 	useEffect(() => {
@@ -120,8 +124,18 @@ const Home = () => {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
-	const getNewPalette = (colorHex: string, harmony: string) => {
-		return getPaletteByHarmony(colorHex, harmony, backgroundColor, textColor);
+	const getNewPalette = (
+		colorHex: string,
+		harmony: string,
+		seed: number = refreshSeed
+	) => {
+		return getPaletteByHarmony(
+			colorHex,
+			harmony,
+			backgroundColor,
+			textColor,
+			String(seed)
+		);
 	};
 
 	return (
@@ -157,9 +171,11 @@ const Home = () => {
 				</div>
 				<div
 					className='p-4 bg-white rounded-2xl shadow-lg'
-					onClick={() =>
-						setPalette(getNewPalette(hsvaToHex(color), harmony) as HexColor[])
-					}
+					onClick={() => {
+						const newSeed = refreshSeed + 1;
+						setRefreshSeed(newSeed);
+						setPalette(getNewPalette(hsvaToHex(color), harmony, newSeed) as HexColor[]);
+					}}
 				>
 					<RefreshCcw className='hover:rotate-120 cursor-pointer transition-all active:scale-105' />
 				</div>
@@ -206,9 +222,11 @@ const Home = () => {
 					setRandomColor={() => {
 						setColor(hslaToHsva(randomHslaColor(0, 359, 10, 90, 40, 60)));
 					}}
-					refreshPalette={() =>
-						setPalette(getNewPalette(hsvaToHex(color), harmony) as HexColor[])
-					}
+					refreshPalette={() => {
+						const newSeed = refreshSeed + 1;
+						setRefreshSeed(newSeed);
+						setPalette(getNewPalette(hsvaToHex(color), harmony, newSeed) as HexColor[]);
+					}}
 				/>
 			</div>
 			<div
