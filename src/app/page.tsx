@@ -205,12 +205,22 @@ const Home = () => {
 					>
 						Generator palet barw
 					</Link>
-					<Link
-						href='/how-it-works'
-						className='text-lg desktop:text-xl py-2 px-3 cursor-pointer hover:underline'
-					>
-						Jak to działa?
-					</Link>
+					<div className='flex gap-2 items-center'>
+						<Link
+							href='/how-it-works'
+							className='text-lg desktop:text-xl py-2 px-3 cursor-pointer hover:underline'
+						>
+							Jak to działa?
+						</Link>
+						<a
+							href='https://danielskowron.com/'
+							target='_blank'
+							rel='noopener noreferrer'
+							className='text-lg desktop:text-xl py-2 px-3 cursor-pointer hover:underline'
+						>
+							Autor
+						</a>
+					</div>
 				</div>
 			</div>
 			<div className='grid grid-cols-1 gap-8 desktop:grid-cols-2 items-start flex-1 px-4 py-4 xl:mx-auto xl:w-[1280px]'>

@@ -27,12 +27,22 @@ const HowItWorksPage = () => {
 					>
 						Generator palet barw
 					</Link>
-					<Link
-						href='/how-it-works'
-						className='text-lg underline desktop:text-xl py-2 px-3 cursor-pointer'
-					>
-						Jak to działa?
-					</Link>
+					<div className='flex gap-2 items-center'>
+						<Link
+							href='/how-it-works'
+							className='text-lg underline desktop:text-xl py-2 px-3 cursor-pointer'
+						>
+							Jak to działa?
+						</Link>
+						<a
+							href='https://danielskowron.com/'
+							target='_blank'
+							rel='noopener noreferrer'
+							className='text-lg desktop:text-xl py-2 px-3 cursor-pointer hover:underline'
+						>
+							Autor
+						</a>
+					</div>
 				</div>
 			</div>
 			<div className='max-w-[1280px] mx-auto p-6 sm:p-10'>
